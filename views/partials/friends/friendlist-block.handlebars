@@ -1,0 +1,1 @@
+<h1>Friends List</h1>

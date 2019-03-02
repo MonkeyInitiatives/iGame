@@ -1,9 +1,10 @@
 {
   "development": {
     "username": "root",
-    "password": "yourRootPassword",
+    "password": "yourPassword",
     "database": "gamelist",
     "host": "localhost",
+    "port": 3306,
     "dialect": "mysql"
   },
   "test": {
