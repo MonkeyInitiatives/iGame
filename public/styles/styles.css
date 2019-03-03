@@ -1,3 +1,34 @@
 .list-group-item {
   line-height: 2.5;
 }
+.wrapper-login{
+  max-width: 256px;
+}
+body{
+  background-color: black;
+  /* height: 100%;  */
+  /* overflow: hidden; */
+}
+.row{
+  /* max-height: 50%; */
+  padding: 20px;
+}
+#friendlist-wrapper{
+  background-color: white;
+  min-height: 75%;
+  max-height: 75%;
+  overflow-y: scroll;
+}
+#gamelist-wrapper{
+  background-color: white;
+  min-height: 75%;
+  max-height: 75%;
+  overflow-y: scroll;
+}
+.game-box{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
