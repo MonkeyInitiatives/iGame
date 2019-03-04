@@ -1,9 +1,10 @@
+
 <div id="home">
   <div class="container">
     <div class="row">
       <div class="col">
         <nav class="navbar navbar-light bg-light justify-content-between">
-          <form class="form-inline">
+          <form action="/class="form-inline">
             <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
           </form>
@@ -15,6 +16,7 @@
       <div class="col-sm-8">
         <div class="wrapper" id="gamelist-wrapper">
           {{> games/gamelist-block}}
+       
         </div>
       </div>
       <div class="col-sm-4">
@@ -28,5 +30,5 @@
   {{> modals/usermodal-block}}
 </div>
 
-{{!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> --}}
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="/js/index.js"></script>
