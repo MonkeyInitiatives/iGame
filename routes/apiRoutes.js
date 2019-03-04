@@ -6,7 +6,7 @@ let db = require("../models");
 module.exports = function (app) {
   // Get all games
   app.get("/api/games", (req, res) => {
-    db.Games.findAll({}).then((dbGames) => {
+    db.Game.findAll({}).then((dbGames) => {
       res.json(dbGames);
     });
   });
@@ -23,7 +23,7 @@ module.exports = function (app) {
   // });
 
   app.post("/api/games", (req, res) => {
-      db.Games.create({
+      db.Game.create({
         game: req.params.game,
         queryUrl: "https://api-v3.igdb.com/games" + game,
         method: 'POST',
@@ -43,7 +43,7 @@ module.exports = function (app) {
 
   // Delete games
   app.delete("/api/games/delete/:id", function (req, res) {
-    db.Games.destroy({
+    db.Game.destroy({
       where: {
         id: req.params.id
       }
