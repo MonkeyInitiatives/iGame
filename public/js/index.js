@@ -108,5 +108,8 @@ $("#searchButton").on("click", function(cb){
       method: "POST",
       url: "/api/search/" + gameToSearch
     })
-      .then(console.log("show modal"));
+      .then(
+        jQuery.noConflict(),
+        $("#searchModal").modal("toggle")
+        );
 });

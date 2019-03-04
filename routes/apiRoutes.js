@@ -48,13 +48,18 @@ module.exports = function (app) {
 
     axios.get("https://api-v3.igdb.com/games/?search="+req.params.title+"&fields=name,summary&limit=5", {
       headers: {
-        "user-key": process.env.IGDB_KEY,
+        "user-key": "14bcc6458a18cfd1b0d77df55ddc0f97",
         "Accept": "application/json"
       }
     })
     .then(response => {
       // Do work here
-      console.log(JSON.stringify(response.data));
+      // res.json(response.data[0]);
+      var hbsObject = {
+        searchList: response.data
+      };
+      console.log(hbsObject);
+      res.render("index", hbsObject);
     })
     .catch(e => {
       console.log("error", e);
