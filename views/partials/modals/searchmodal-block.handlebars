@@ -1,0 +1,19 @@
+<div class="modal fade" id="searchModal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Search Results</h4>
+            </div>
+            {{#each searchList}}
+                <div class="modal-body">
+                    <p>{{name}}</p>>
+                    <p>{{summary}}</p>
+                    <button type="button" class="btn btn-default">Add to library</button>
+                </div>
+            {{/each}}
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div> 
+    </div>
+</div>
