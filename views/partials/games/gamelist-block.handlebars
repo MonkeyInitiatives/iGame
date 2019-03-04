@@ -1,33 +1,6 @@
-<h1>Game List</h1>
 <div class="row">
     <div class="col-sm-6">
-        <img src="http://lorempixel.com/200/300/" alt="Game" class="game-box" data-toggle="modal" data-target="#gameModal">
-    </div>
-    <div class="col-sm-6">
-        <img src="http://lorempixel.com/200/300/" alt="Game" class="game-box" data-toggle="modal" data-target="#gameModal">
+        <img src={{poster}} alt="Game" class="game-box" data-toggle="modal" data-target="#gameModal-{{name}}" data-name={{name}} data-rating={{rating}} data-summary={{summary}} data-poster={{poster}}>
     </div>
 </div>
-<div class="row">
-    <div class="col-sm-6">
-        <img src="http://lorempixel.com/200/300/" alt="Game" class="game-box" data-toggle="modal" data-target="#gameModal">
-    </div>
-    <div class="col-sm-6">
-        <img src="http://lorempixel.com/200/300/" alt="Game" class="game-box" data-toggle="modal" data-target="#gameModal">
-    </div>
-</div>
-<div class="row">
-    <div class="col-sm-6">
-        <img src="http://lorempixel.com/200/300/" alt="Game" class="game-box" data-toggle="modal" data-target="#gameModal">
-    </div>
-    <div class="col-sm-6">
-        <img src="http://lorempixel.com/200/300/" alt="Game" class="game-box" data-toggle="modal" data-target="#gameModal">
-    </div>
-</div>
-<div class="row">
-    <div class="col-sm-6">
-        <img src="http://lorempixel.com/200/300/" alt="Game" class="game-box" data-toggle="modal" data-target="#gameModal">
-    </div>
-    <div class="col-sm-6">
-        <img src="http://lorempixel.com/200/300/" alt="Game" class="game-box" data-toggle="modal" data-target="#gameModal">
-    </div>
-</div>
+{{> modals/gamemodal-block}}

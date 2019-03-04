@@ -1,7 +1,7 @@
 // Get references to page elements
 var $exampleText = $("#example-text");
 var $exampleDescription = $("#example-description");
-var $submitBtn = $("#submit");
+// var $submitBtn = $("#submit");
 var $exampleList = $("#example-list");
 
 // The API object contains methods for each kind of request we'll make
@@ -95,5 +95,18 @@ var handleDeleteBtnClick = function() {
 };
 
 // Add event listeners to the submit and delete buttons
-$submitBtn.on("click", handleFormSubmit);
+// $submitBtn.on("click", handleFormSubmit);
 $exampleList.on("click", ".delete", handleDeleteBtnClick);
+
+//when the search button is clicked, it calls the post route that then calls the igdb api.
+$("#searchButton").on("click", function(cb){
+  event.preventDefault();
+
+  let gameToSearch = $("#searchText").val();
+  console.log(gameToSearch);
+  $.ajax({
+      method: "POST",
+      url: "/api/search/" + gameToSearch
+    })
+      .then(console.log("show modal"));
+});

@@ -1,5 +1,6 @@
 
 require('dotenv').config()
+var axios = require("axios");
 let bodyparser = require('body-parser');
 let db = require("../models");
 
@@ -38,6 +39,25 @@ module.exports = function (app) {
     })
     .catch(err => {
       console.error(err);
+    });
+  });
+
+  //I did another api route different from the one above that searches the aidb api for a game, returning an object of names and summaries
+  app.post("/api/search/:title", (req, res) => {
+    console.log(req.params.title);
+
+    axios.get("https://api-v3.igdb.com/games/?search="+req.params.title+"&fields=name,summary&limit=5", {
+      headers: {
+        "user-key": process.env.IGDB_KEY,
+        "Accept": "application/json"
+      }
+    })
+    .then(response => {
+      // Do work here
+      console.log(JSON.stringify(response.data));
+    })
+    .catch(e => {
+      console.log("error", e);
     });
   });
 
