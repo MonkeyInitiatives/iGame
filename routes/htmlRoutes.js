@@ -7,7 +7,7 @@ module.exports = function (app) {
 
   // Load home page
   app.get("/", (req, res) => {
-    db.Games.findAll({}).then((data) => {
+    db.Game.findAll({}).then((data) => {
       let hbsObject = {
         games: data
       }
@@ -18,7 +18,7 @@ module.exports = function (app) {
   // Load games 
   app.get("/api/games", (req, res) => {
     connection.sync().then(() => {
-      db.Games.findAll({
+      db.Game.findAll({
         attributes: ["name", "imageUrl", "rating", "summary"]
       }).then((data) => {
         let hbsObject = {
