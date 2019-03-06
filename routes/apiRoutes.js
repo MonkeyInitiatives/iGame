@@ -35,7 +35,7 @@ module.exports = function (app) {
         data: "name, imageUrl, rating, summary"
     })
     .then(response => {
-      console.log(response.data);
+      // console.log(response.data);
     })
     .catch(err => {
       console.error(err);
@@ -61,7 +61,7 @@ module.exports = function (app) {
   });
 
   app.post("/api/searchTitle/:title", (req, res) => {
-    axios.get("https://api-v3.igdb.com/games/"+req.params.title+"?fields=name,summary", {
+    axios.get("https://api-v3.igdb.com/games/"+req.params.title+"?fields=*", {
 
       headers: {
         "user-key": "14bcc6458a18cfd1b0d77df55ddc0f97",
@@ -71,7 +71,34 @@ module.exports = function (app) {
     .then(response => {
       // Do work here
       // res.json(response.data[0]);
-      console.log(response.data);
+      // console.log(response.data[0].cover);
+
+      var newGame = {
+        name: response.data[0].name,
+        rating: response.data[0].rating,
+        slug: response.data[0].slug,
+        poster: "http://www.writingfordesigners.com/wp-content/uploads/2016/12/Doom.jpg",
+        hypes: response.data[0].popularity,
+        summary: response.data[0].summary,
+      }
+      axios.get("https://api-v3.igdb.com/covers/"+response.data[0].cover+"?fields=*", {
+      headers: {
+        "user-key": "14bcc6458a18cfd1b0d77df55ddc0f97",
+        "Accept": "application/json"
+      },
+      data: "fields alpha_channel,animated,game,height,image_id,url,width;"
+    })
+    .then(response => {
+      // console.log(response.data);
+      newGame.poster = "http:"+response.data[0].url;
+      newGame.poster = newGame.poster.replace("t_thumb","t_cover_big");
+      db.Game.create(newGame).then(function(cb) {
+        res.json(cb);
+      });
+    });
+      
+
+
 
     })
     .catch(e => {
