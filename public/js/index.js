@@ -111,6 +111,7 @@ $(document).ready(function() {
     .then(function(results){
       // console.log("This is the result: " + results.length);
       $("#searchModalInsertion").empty();
+
       $("#addLibrary").attr("onclick", "").unbind("click");
       for(var i = 0; i<results.length; i++){
         $("#searchModalInsertion").append("<h2>"+results[i].name+"</h2>");
@@ -123,6 +124,7 @@ $(document).ready(function() {
         event.preventDefault();
         // console.log("Hello");
         // console.log($(this).attr("data-gameID"));
+
         getTitle($(this).attr("data-gameID"));
       });
     })
@@ -136,5 +138,6 @@ function getTitle(theTitle){
   })
   .then(function(results){
     window.location.href = "/";
+
   });
 }

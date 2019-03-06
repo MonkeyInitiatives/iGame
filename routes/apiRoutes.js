@@ -62,6 +62,7 @@ module.exports = function (app) {
 
   app.post("/api/searchTitle/:title", (req, res) => {
     axios.get("https://api-v3.igdb.com/games/"+req.params.title+"?fields=*", {
+
       headers: {
         "user-key": "14bcc6458a18cfd1b0d77df55ddc0f97",
         "Accept": "application/json"
@@ -96,6 +97,7 @@ module.exports = function (app) {
       });
     });
       
+
 
 
     })
