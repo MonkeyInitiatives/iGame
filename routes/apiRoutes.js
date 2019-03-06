@@ -30,7 +30,7 @@ module.exports = function (app) {
         method: 'POST',
         headers: {
           'Accept': 'application/json',
-          'user-key': process.env.IGDB_KEY
+          'user-key': "14bcc6458a18cfd1b0d77df55ddc0f97"
         },
         data: "name, imageUrl, rating, summary"
     })
@@ -44,8 +44,6 @@ module.exports = function (app) {
 
   //I did another api route different from the one above that searches the aidb api for a game, returning an object of names and summaries
   app.post("/api/search/:title", (req, res) => {
-    console.log(req.params.title);
-
     axios.get("https://api-v3.igdb.com/games/?search="+req.params.title+"&fields=name,summary&limit=5", {
       headers: {
         "user-key": "14bcc6458a18cfd1b0d77df55ddc0f97",
@@ -55,11 +53,26 @@ module.exports = function (app) {
     .then(response => {
       // Do work here
       // res.json(response.data[0]);
-      var hbsObject = {
-        searchList: response.data
-      };
-      console.log(hbsObject);
-      res.render("index", hbsObject);
+      res.json(response.data);
+    })
+    .catch(e => {
+      console.log("error", e);
+    });
+  });
+
+  app.post("/api/searchTitle/:title", (req, res) => {
+    axios.get("https://api-v3.igdb.com/games/"+req.params.title+"?fields=name,summary", {
+
+      headers: {
+        "user-key": "14bcc6458a18cfd1b0d77df55ddc0f97",
+        "Accept": "application/json"
+      }
+    })
+    .then(response => {
+      // Do work here
+      // res.json(response.data[0]);
+      console.log(response.data);
+
     })
     .catch(e => {
       console.log("error", e);

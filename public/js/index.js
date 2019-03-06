@@ -99,17 +99,42 @@ var handleDeleteBtnClick = function() {
 $exampleList.on("click", ".delete", handleDeleteBtnClick);
 
 //when the search button is clicked, it calls the post route that then calls the igdb api.
-$("#searchButton").on("click", function(cb){
-  event.preventDefault();
-
-  let gameToSearch = $("#searchText").val();
-  console.log(gameToSearch);
-  $.ajax({
+$(document).ready(function() {
+  $("#searchButton").on("click", function(cb){
+    event.preventDefault();
+  
+    let gameToSearch = $("#searchText").val();
+    $.ajax({
       method: "POST",
       url: "/api/search/" + gameToSearch
     })
-      .then(
-        jQuery.noConflict(),
-        $("#searchModal").modal("toggle")
-        );
+    .then(function(results){
+      console.log("This is the result: " + results.length);
+      $("searchModalInsertion").empty();
+      $("#addLibrary").attr("onclick", "").unbind("click");
+      for(var i = 0; i<results.length; i++){
+        $("#searchModalInsertion").append("<h2>"+results[i].name+"</h2>");
+        $("#searchModalInsertion").append("<p>"+results[i].summary+"</p>");
+        $("#searchModalInsertion").append("<button type='button' class='btn btn-outline-success my-2 my-sm-0 addLibrary' data-gameID="+results[i].id+">Add to Library</button>");
+      }
+      // jQuery.noConflict();
+      $("#searchModal").modal("toggle")
+      $(".addLibrary").on("click", function(cb){
+        event.preventDefault();
+        console.log("Hello");
+        console.log($(this).attr("data-gameID"));
+        getTitle($(this).attr("data-gameID"));
+      });
+    })
+  });  
 });
+
+function getTitle(theTitle){
+  $.ajax({
+    method: "POST",
+    url: "/api/searchTitle/" + theTitle
+  })
+  .then(function(results){
+
+  });
+}
