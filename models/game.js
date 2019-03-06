@@ -6,16 +6,15 @@ module.exports = function (sequelize, DataTypes) {
     rating: DataTypes.INTEGER,
     hypes: DataTypes.INTEGER,
     summary: DataTypes.TEXT,
+    slug: DataTypes.STRING,
     poster: {
       type: DataTypes.STRING,
       allowNull: false
     },
   });
   Game.associate = function(models) {
-    Game.belongsTo(models.User, {
-      foreignKey: {
-        allowNull: false
-      }
+    Game.hasMany(models.User, {
+      onDelete: "cascade"
     });
   };
   return Game;

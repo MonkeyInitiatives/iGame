@@ -109,8 +109,8 @@ $(document).ready(function() {
       url: "/api/search/" + gameToSearch
     })
     .then(function(results){
-      console.log("This is the result: " + results.length);
-      $("searchModalInsertion").empty();
+      // console.log("This is the result: " + results.length);
+      $("#searchModalInsertion").empty();
       $("#addLibrary").attr("onclick", "").unbind("click");
       for(var i = 0; i<results.length; i++){
         $("#searchModalInsertion").append("<h2>"+results[i].name+"</h2>");
@@ -121,8 +121,8 @@ $(document).ready(function() {
       $("#searchModal").modal("toggle")
       $(".addLibrary").on("click", function(cb){
         event.preventDefault();
-        console.log("Hello");
-        console.log($(this).attr("data-gameID"));
+        // console.log("Hello");
+        // console.log($(this).attr("data-gameID"));
         getTitle($(this).attr("data-gameID"));
       });
     })
@@ -135,6 +135,6 @@ function getTitle(theTitle){
     url: "/api/searchTitle/" + theTitle
   })
   .then(function(results){
-
+    window.location.href = "/";
   });
 }
