@@ -4,17 +4,17 @@
             <div class="modal-header">
                 <h4 class="modal-title">Search Results</h4>
             </div>
-            <div class="modal-body"></div>
-                <p>Hello</p>
-                <h1>{{searchList}}</h1>                
-                {{#each searchList}}
+
+            {{#each searchList}}
+                <div class="modal-body">
                     <p>{{name}}</p>>
                     <p>{{summary}}</p>
                     <button type="button" class="btn btn-default">Add to library</button>
-                {{/each}}
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
+            {{/each}}
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
             </div>
         </div> 
     </div>

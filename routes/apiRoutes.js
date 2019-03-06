@@ -62,6 +62,7 @@ module.exports = function (app) {
 
   app.post("/api/searchTitle/:title", (req, res) => {
     axios.get("https://api-v3.igdb.com/games/"+req.params.title+"?fields=name,summary", {
+
       headers: {
         "user-key": "14bcc6458a18cfd1b0d77df55ddc0f97",
         "Accept": "application/json"
@@ -71,6 +72,7 @@ module.exports = function (app) {
       // Do work here
       // res.json(response.data[0]);
       console.log(response.data);
+
     })
     .catch(e => {
       console.log("error", e);
