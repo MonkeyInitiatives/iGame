@@ -12,10 +12,15 @@ module.exports = function (sequelize, DataTypes) {
       allowNull: false
     },
   });
+  
   Game.associate = function (models) {
-    Game.hasMany(models.User, {
-      onDelete: "cascade"
+    // Associating user with Game
+    // When a User is deleted, also delete any associated Game
+    Game.belongsTo(models.User, {
+        foreignKey: {
+            allowNull: false
+        }
     });
-  };
+};
   return Game;
 };

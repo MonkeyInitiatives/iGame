@@ -33,14 +33,10 @@ module.exports = function (sequelize, DataTypes) {
         // }
     });
     User.associate = function (models) {
-        // Associating user with Game
-        // When a User is deleted, also delete any associated Game
-        User.belongsTo(models.Game, {
-            foreignKey: {
-                allowNull: false
-            }
-        });
-    };
+        User.hasMany(models.Game, {
+          onDelete: "cascade"
+    });
+      };
 
     // checking if password is valid
     User.prototype.validPassword = function (password) {

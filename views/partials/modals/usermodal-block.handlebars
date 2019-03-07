@@ -1,16 +1,19 @@
 <div class="modal fade" id="userModal" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
+          {{#each user}}
             <div class="modal-header">
-                <h4 class="modal-title">User Name</h4>
+                <h4 class="modal-title">{{userName}}</h4>
             </div>
             <div class="modal-body">
-                <img src={{avatar}} alt="Game" class="game-box" id="single-game">
-                <p>Some junk, or the options for their account</p>
+                {{!-- <img src="{{avatar}}" alt="Game" class="game-box" id="single-game"> --}}                
+                  <p>Id: {{userID}}</p>
+                  <p>Email: {{email}}</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
+          {{/each}}
         </div> 
     </div>
 </div>
