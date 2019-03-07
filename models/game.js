@@ -12,7 +12,7 @@ module.exports = function (sequelize, DataTypes) {
       allowNull: false
     },
   });
-  Game.associate = function(models) {
+  Game.associate = function (models) {
     Game.hasMany(models.User, {
       onDelete: "cascade"
     });
