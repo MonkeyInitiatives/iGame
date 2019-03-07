@@ -4,7 +4,7 @@ $(document).ready(function () {
     let emailInput = $("input#email");
     let passwordInput = $("input#password");
     let confirmPassword = $("input#password2");
-
+    console.log("register user clicked");
     signupForm.on("submit", (event) => {
         console.log("BUTTON CLICKED")
         event.preventDefault();
@@ -17,6 +17,7 @@ $(document).ready(function () {
         if (!userData.name || !userData.email || !userData.password || !userData.confirmPass) {
             return;
         }
+        console.log(userData);
         signupUser(userData.name, userData.email, userData.password, userData.confirmPass);
         nameInput.val("");
         emailInput.val("");
@@ -26,11 +27,13 @@ $(document).ready(function () {
 
     let signupUser = (name, email, password, confirmPass) => {
         if (name || email || password || confirmPass) {
-            $.ajax({
-                method: "POST",
-                url: "/signup"
+            $.post("/signup", {
+                name: name,
+                email: email,
+                password: password
             }).then(function (results) {
-                window.location.href = "/";
+                console.log(results);
+                // window.location.href = "/";
             })
             // "/signup", {
             // name: name,

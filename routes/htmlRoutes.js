@@ -8,14 +8,26 @@ let isAuthenticated = require("../config/middleware/isAuthenticated");
 
 module.exports = function (app) {
 
-  app.get("/welcome", function (req, res) {
-    res.render("welcome");
+  app.get("/library", function (req, res) {
+    db.Game.findAll({
+      where: {
+        UserId: req.user.id
+      }
+    }).then((data) => {
+      let hbsObject = {
+        games: data,
+        user: [{userID: req.user.id, userName: req.user.name, email: req.user.email}]
+      }
+      console.log(hbsObject.games);
+      console.log(hbsObject.user);
+      res.render("index", hbsObject);
+    });
   });
 
   app.get("/login", function (req, res) {
     // If the user already has an account
     if (req.user) {
-      res.render("index");
+      res.render("/library");
     }
   });
 
@@ -34,12 +46,17 @@ module.exports = function (app) {
   // Load Game Page
   // Took out "isAuthenticated," for some reason, it wasn't grabbing the 
   app.get("/", (req, res) => {
-    db.Game.findAll({}).then((data) => {
-      let hbsObject = {
-        games: data
-      }
-      res.render("index", hbsObject);
-    });
+    res.render("welcome");
+    // db.Game.findAll({
+    //   where: {
+    //     UserId: req.user.id
+    //   }
+    // }).then((data) => {
+    //   let hbsObject = {
+    //     games: data
+    //   }
+    //   res.render("index", hbsObject);
+    // });
   });
 
   // Load games 

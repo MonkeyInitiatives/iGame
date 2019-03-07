@@ -15,7 +15,7 @@ module.exports = function (app) {
   // =============================================================================
 
   // Welcome Page
-  app.get("/welcome", function (req, res) {
+  app.get("/", function (req, res) {
     res.render("welcome");
   });
 
@@ -32,82 +32,23 @@ module.exports = function (app) {
   // Signup 
   app.post("/signup", function (req, res) {
     console.log(req.body);
-    let {
-      name,
-      email,
-      password,
-      password2
-    } = req.body;
-    let errors = [];
-    if (!name || !email || !password || !password2) {
-      errors.push({
-        msg: "Please enter all fields"
-      });
-    }
-    if (password != password2) {
-      errors.push({
-        msg: "Passwords don't match"
-      })
-    }
-    if (errors.length > 0) {
-      res.render("signup", {
-        errors,
-        name,
-        email,
-        password,
-        password2
-      });
-    } else {
-      db.User.findOne({
-        where: {
-          email: email
-        }
-      }).then(db.User, function () {
-        if (db.User) {
-          errors.push({
-            msg: "Email alredy exists"
-          });
-          res.render("signup", {
-            errors,
-            name,
-            email,
-            password,
-            password2
-          });
-        } else {
-          const newUser = new User({
-            name,
-            email,
-            password
-          });
-          bcrypt.genSalt(10, (err, salt) => {
-            bcrypt.hash(newUser.password, salt, (err, hash) => {
-              if (err) throw err;
-              newUser.password = hash;
-              newUser
-                .save()
-                .then(user => {
-                  req.flash(
-                    "success_msg",
-                    "You are now registered for iGame!"
-                  );
-                  res.render("/api/games");
-                })
-                .catch(err => console.log(err));
-            });
-          });
-        }
-      });
-    }
+    db.User.create({
+      name: req.body.name,
+      email: req.body.email,
+      password: req.body.password
+    }).then(function(){
+      console.log("here?");
+      res.redirect("/library");
+    });
+    
   });
 
   // Login
-  app.post("/login", (req, res, next) => {
-    passport.authenticate("local", {
-      successRedirect: "/",
-      failureRedirect: "/login",
-      failureFlash: true
-    })(req, res, next);
+  app.post("/api/login", passport.authenticate("local"), function(req, res) {
+    // Since we're doing a POST with javascript, we can't actually redirect that post into a GET request
+    // So we're sending the user back the route to the members page because the redirect will happen on the front end
+    // They won't get this or even be able to access this page if they aren't authed
+    res.json("/library");
   });
 
   // Logout
@@ -125,11 +66,26 @@ module.exports = function (app) {
   // });
 
   // Get all games
-  app.get("/api/games", (req, res) => {
-    // res.render("index");
-    db.Game.findAll({}).then((dbGames) => {
-      res.json(dbGames);
-    });
+  // app.get("/api/games", (req, res) => {
+  //   // res.render("index");
+  //   db.Game.findAll({}).then((dbGames) => {
+  //     res.json(dbGames);
+  //   });
+  // });
+
+  app.get("/api/user_data", function(req, res) {
+    if (!req.user) {
+      // The user is not logged in, send back an empty object
+      res.json({});
+    }
+    else {
+      // Otherwise send back the user's email and id
+      // Sending back a password, even a hashed password, isn't a good idea
+      res.json({
+        email: req.user.email,
+        id: req.user.id
+      });
+    }
   });
 
   app.post("/api/games", (req, res) => {
@@ -189,6 +145,7 @@ module.exports = function (app) {
           poster: "http://www.writingfordesigners.com/wp-content/uploads/2016/12/Doom.jpg",
           hypes: response.data[0].popularity,
           summary: response.data[0].summary,
+          UserId: req.user.id
         }
         axios.get("https://api-v3.igdb.com/covers/" + response.data[0].cover + "?fields=*", {
             headers: {
