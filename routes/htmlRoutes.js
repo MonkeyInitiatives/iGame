@@ -9,19 +9,27 @@ let isAuthenticated = require("../config/middleware/isAuthenticated");
 module.exports = function (app) {
 
   app.get("/library", function (req, res) {
-    db.Game.findAll({
-      where: {
-        UserId: req.user.id
-      }
-    }).then((data) => {
-      let hbsObject = {
-        games: data,
-        user: [{userID: req.user.id, userName: req.user.name, email: req.user.email}]
-      }
-      console.log(hbsObject.games);
-      console.log(hbsObject.user);
-      res.render("index", hbsObject);
-    });
+    if (!req.user) {
+      res.redirect("/")
+    } else {
+      db.Game.findAll({
+        where: {
+          UserId: req.user.id
+        }
+      }).then((data) => {
+        let hbsObject = {
+          games: data,
+          user: [{
+            userID: req.user.id,
+            userName: req.user.name,
+            email: req.user.email
+          }]
+        }
+        console.log(hbsObject.games);
+        console.log(hbsObject.user);
+        res.render("index", hbsObject);
+      });
+    }
   });
 
   app.get("/login", function (req, res) {

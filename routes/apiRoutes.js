@@ -38,7 +38,7 @@ module.exports = function (app) {
       password: req.body.password
     }).then(function(){
       console.log("here?");
-      res.redirect("/library");
+      res.redirect("/login");
     });
     
   });
@@ -54,8 +54,8 @@ module.exports = function (app) {
   // Logout
   app.get("/logout", (req, res) => {
     req.logout();
-    req.flash("success_msg", "You are logged out");
-    res.render("/welcome");
+    // req.flash("success_msg", "You are logged out");
+    res.render("welcome");
   });
 
   // ==============================================================================

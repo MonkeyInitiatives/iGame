@@ -137,6 +137,6 @@ function getTitle(theTitle) {
       url: "/api/searchTitle/" + theTitle
     })
     .then(function (results) {
-      window.location.href = "/";
+      window.location.href = "/library";
     });
 }
