@@ -2,17 +2,38 @@
     <div class="modal-dialog">
         <div class="modal-content">
           {{#each user}}
+          
             <div class="modal-header">
                 <h4 class="modal-title">{{userName}}</h4>
             </div>
             <div class="modal-body">
-                {{!-- <img src="{{avatar}}" alt="Game" class="game-box" id="single-game"> --}}                
-                  <p>Id: {{userID}}</p>
-                  <p>Email: {{email}}</p>
+                <img src="{{avatar}}" alt="UserAvatar" id="userAvatar" class="game-box">  
+                <div class="form-group">
+                  <label for="inputAvatar">Avatar Image URL</label>
+                  <input type="text" class="form-control" id="inputAvatar" placeholder="{{avatar}}">
+                </div> 
+                <div class="form-group">
+                  <label for="inputBackground">Background Image URL</label>
+                  <input type="text" class="form-control" id="inputBackground" placeholder="{{backgroundimage}}">
+                </div>              
+                <div class="form-group">
+                  <label for="inputColor">Color</label>
+                  <select id="inputColor" class="form-control">
+                    <option selected>{{accentcolor}}</option>
+                    <option>black</option>
+                    <option>red</option>
+                    <option>orange</option>
+                    <option>yellow</option>
+                    <option>green</option>
+                    <option>blue</option>
+                    <option>indigo</option>
+                    <option>violet</option>
+                  </select>
+                </div>
             </div>
             <div class="modal-footer">
-            <button><a href="/logout" class="btn btn-primary btn-block mb-2">Logout</a></button>
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button onclick="location.href='/logout'" class="btn btn-primary col-sm-2">Logout</button>
+                <button type="button" class="btn btn-primary col-sm-2 save-user-data" data-dismiss="modal">Save</button>
             </div>
           {{/each}}
         </div> 

@@ -12,7 +12,7 @@ $(document).ready(function () {
         };
     
         if (!userData.email || !userData.password) {
-          console.log("I'm here");
+          //console.log("I'm here");
           return;
         }
     
@@ -28,7 +28,7 @@ $(document).ready(function () {
                 email: email,
                 password: password
             }).then(function (results) {
-                console.log(results);
+               // console.log(results);
                 window.location.replace("/library");
             })
             // "/signup", {

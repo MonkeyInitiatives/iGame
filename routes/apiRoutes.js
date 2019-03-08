@@ -6,38 +6,24 @@ let bcrypt = require("bcryptjs");
 let bodyparser = require("body-parser");
 let db = require("../models");
 let passport = require("../config/passport");
-// let passport = require("passport");
 
 module.exports = function (app) {
 
-  // =============================================================================
-  // USERS =======================================================================
-  // =============================================================================
+  /*
 
-  // Welcome Page
-  app.get("/", function (req, res) {
-    res.render("welcome");
-  });
+  User login and signup routes
 
-  // Login Page
-  app.get("/login", function (req, res) {
-    res.render("login");
-  });
-
-  // Signup Page 
-  app.get("/signup", function (req, res) {
-    res.render("signup");
-  });
+  */
 
   // Signup 
   app.post("/signup", function (req, res) {
-    console.log(req.body);
+    // console.log(req.body);
     db.User.create({
       name: req.body.name,
       email: req.body.email,
       password: req.body.password
     }).then(function(){
-      console.log("here?");
+      // console.log("here?");
       res.redirect("/login");
     });
     
@@ -58,20 +44,19 @@ module.exports = function (app) {
     res.render("welcome");
   });
 
-  // ==============================================================================
-  // GAMES ========================================================================
-  // ==============================================================================
-  // app.get("/api/games", function (req, res) {
-  //   res.render("index");
-  // });
+  // Update a user's avatar, backgroundimage, and accent color.
+  app.post("/api/update_user", (req, res) => {
+    db.User.update({
+      avatar: req.body.avatar,
+      backgroundimage: req.body.backgroundimage,
+      accentcolor: req.body.accentcolor
+    },
+      {where:  { id: req.user.id }
+    }).then(function(){
+      res.render("index");
+    });
 
-  // Get all games
-  // app.get("/api/games", (req, res) => {
-  //   // res.render("index");
-  //   db.Game.findAll({}).then((dbGames) => {
-  //     res.json(dbGames);
-  //   });
-  // });
+  });
 
   app.get("/api/user_data", function(req, res) {
     if (!req.user) {
@@ -88,6 +73,12 @@ module.exports = function (app) {
     }
   });
 
+  /*
+
+  GAME LIBRARY AND DATABASE ROUTES
+
+  */
+  
   app.post("/api/games", (req, res) => {
     db.Game.create({
         game: req.params.game,
@@ -107,7 +98,7 @@ module.exports = function (app) {
       });
   });
 
-  //I did another api route different from the one above that searches the aidb api for a game, returning an object of names and summaries
+  //Searches for 5 titles in api. Perhaps show/get more than name, summary?
   app.post("/api/search/:title", (req, res) => {
     axios.get("https://api-v3.igdb.com/games/?search=" + req.params.title + "&fields=name,summary&limit=5", {
         headers: {
@@ -116,8 +107,7 @@ module.exports = function (app) {
         }
       })
       .then(response => {
-        // Do work here
-        // res.json(response.data[0]);
+
         res.json(response.data);
       })
       .catch(e => {
@@ -125,6 +115,8 @@ module.exports = function (app) {
       });
   });
 
+  //searches for a specific game and adds to user library
+  //TODO; make sure text has no quotations when adding to name or summary
   app.post("/api/searchTitle/:title", (req, res) => {
     axios.get("https://api-v3.igdb.com/games/" + req.params.title + "?fields=*", {
 
@@ -134,17 +126,14 @@ module.exports = function (app) {
         }
       })
       .then(response => {
-        // Do work here
-        // res.json(response.data[0]);
-        // console.log(response.data[0].cover);
-
         var newGame = {
           name: response.data[0].name,
-          rating: response.data[0].rating,
+          rating: response.data[0].aggregated_rating,
           slug: response.data[0].slug,
           poster: "http://www.writingfordesigners.com/wp-content/uploads/2016/12/Doom.jpg",
           hypes: response.data[0].popularity,
           summary: response.data[0].summary,
+          releasedate: response.data[0].first_release_date,
           UserId: req.user.id
         }
         axios.get("https://api-v3.igdb.com/covers/" + response.data[0].cover + "?fields=*", {
@@ -168,7 +157,7 @@ module.exports = function (app) {
       });
   });
 
-  // Delete games
+  // Delete games, not implemented right now.
   app.delete("/api/games/delete/:id", function (req, res) {
     db.Game.destroy({
       where: {

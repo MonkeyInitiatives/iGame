@@ -7,6 +7,7 @@ module.exports = function (sequelize, DataTypes) {
     hypes: DataTypes.INTEGER,
     summary: DataTypes.TEXT,
     slug: DataTypes.STRING,
+    releasedate: DataTypes.INTEGER,
     poster: {
       type: DataTypes.STRING,
       allowNull: false

@@ -1,13 +1,19 @@
-
 <div id="home">
   <div class="container">
     <div class="row">
       <div class="col">
-        <nav class="navbar navbar-light bg-light justify-content-between">
-
-            <input class="form-control mr-sm-2" id="searchText" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" id="searchButton" type="submit">Search</button>
-
+        {{#each user}}
+        <style>
+              body {
+                  background-image:url({{backgroundimage}});
+                  background-repeat: no-repeat;
+                  background-size: 100vw 100vh;
+              }
+          </style>
+          <nav class="navbar navbar-light bg-light justify-content-between accentColor" style="background-color:{{accentcolor}} !important;">
+        {{/each}}
+          <input class="form-control mr-sm-2" id="searchText" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success my-2 my-sm-0" id="searchButton" type="submit">Search</button>
           <a class="navbar-brand" data-toggle="modal" data-target="#userModal">Account</a>
         </nav>
       </div>
@@ -15,6 +21,7 @@
     <div class="row">
       <div class="col-sm-8">
         <div class="wrapper" id="gamelist-wrapper">
+          <h1>Game Library</h1>
           {{#each games}}
             {{> games/gamelist-block}}
           {{/each}}       

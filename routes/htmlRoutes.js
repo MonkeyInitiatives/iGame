@@ -8,6 +8,8 @@ let isAuthenticated = require("../config/middleware/isAuthenticated");
 
 module.exports = function (app) {
 
+
+  // Load library page and fills in game objects from database for specific user.
   app.get("/library", function (req, res) {
     if (!req.user) {
       res.redirect("/")
@@ -22,49 +24,46 @@ module.exports = function (app) {
           user: [{
             userID: req.user.id,
             userName: req.user.name,
-            email: req.user.email
+            email: req.user.email,
+            avatar: req.user.avatar,
+            backgroundimage: req.user.backgroundimage,
+            accentcolor: req.user.accentcolor
           }]
         }
-        console.log(hbsObject.games);
-        console.log(hbsObject.user);
         res.render("index", hbsObject);
       });
     }
   });
 
+  // Load login page unless user already signed in
   app.get("/login", function (req, res) {
     // If the user already has an account
     if (req.user) {
-      res.render("/library");
+      res.redirect("/library");
+    }
+    else{
+      res.render("login");
     }
   });
 
-  // app.get("/", function(req,res) {
-  //   res.render("index")
-  // })
+  // Load signup unless logged in already
+  app.get("/signup", function (req, res) {
+    if (req.user) {
+      res.redirect("/library");
+    }
+    else{
+      res.render("signup");
+    }
+  });
 
-  // Here we've add our isAuthenticated middleware to this route.
-  // If a user who is not logged in tries to access this route they will be redirected to the signup page
-  // app.get("/api/games", isAuthenticated, function (req, res) {
-  //   res.render("/api/games", {
-  //     user: req.user
-  //   });
-  // });
-
-  // Load Game Page
-  // Took out "isAuthenticated," for some reason, it wasn't grabbing the 
+  // Load welcome/start page or library if user is logged in
   app.get("/", (req, res) => {
-    res.render("welcome");
-    // db.Game.findAll({
-    //   where: {
-    //     UserId: req.user.id
-    //   }
-    // }).then((data) => {
-    //   let hbsObject = {
-    //     games: data
-    //   }
-    //   res.render("index", hbsObject);
-    // });
+    if (req.user) {
+      res.redirect("/library");
+    }
+    else{
+      res.render("welcome");
+    }
   });
 
   // Load games 
