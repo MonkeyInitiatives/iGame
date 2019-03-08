@@ -100,6 +100,36 @@ $exampleList.on("click", ".delete", handleDeleteBtnClick);
 
 //when the search button is clicked, it calls the post route that then calls the igdb api.
 $(document).ready(function () {
+
+  var options = {
+    data: [],
+    getValue: function(element) {
+      return element.name;
+    },
+    placeholder: "Search your library",
+  };
+  $('.game-object').each(function() {
+    var theobject = {"name": $(this).text()};
+    options.data.push(theobject);
+  });
+  console.log(options.data);
+  options.list = {
+    match: {
+      enabled: true
+    },
+		onChooseEvent: function() {
+      console.log($("#basics").val());
+      $('.modal').each(function() {
+        
+        if($(this).text().includes($("#basics").val())){
+          $(this).modal("toggle");
+        }
+      });
+    }	
+  };
+  $("#basics").easyAutocomplete(options);
+
+
   $(".save-user-data").on("click", function (cb) {
     var avatar = "./images/default-avatar.png";;
     var backgroundimage = "./images/default-background.png";
