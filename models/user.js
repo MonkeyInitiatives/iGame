@@ -18,19 +18,22 @@ module.exports = function (sequelize, DataTypes) {
             validate: {
                 isEmail: true
             }
+        },
+        avatar: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            defaultValue: "./images/default-avatar.png"
+        },
+        backgroundimage: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            defaultValue: "./images/default-background.png"
+        },
+        accentcolor: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            defaultValue: "white"
         }
-        // avatar: {
-        //     type: DataTypes.STRING,
-        //     allowNull: false
-        // },
-        // background: {
-        //     type: DataTypes.STRING,
-        //     allowNull: false
-        // },
-        // color: {
-        //     type: DataTypes.STRING,
-        //     allowNull: false
-        // }
     });
     User.associate = function (models) {
         User.hasMany(models.Game, {

@@ -4,11 +4,11 @@ $(document).ready(function () {
     let emailInput = $("input#email");
     let passwordInput = $("input#password");
     let confirmPassword = $("input#password2");
-    console.log("register user clicked");
+    // console.log("register user clicked");
 
     
     signupForm.on("submit", (event) => {
-        console.log("BUTTON CLICKED")
+       // console.log("BUTTON CLICKED")
         event.preventDefault();
         let userData = {
             name: nameInput.val().trim(),
@@ -19,7 +19,7 @@ $(document).ready(function () {
         if (!userData.name || !userData.email || !userData.password || !userData.confirmPass) {
             return;
         }
-        console.log(userData);
+        //console.log(userData);
         signupUser(userData.name, userData.email, userData.password, userData.confirmPass);
         nameInput.val("");
         emailInput.val("");
@@ -34,7 +34,7 @@ $(document).ready(function () {
                 email: email,
                 password: password
             }).then(function (results) {
-                console.log(results);
+                // console.log(results);
                 window.location.href = "/login";
             })
             // "/signup", {

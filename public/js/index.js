@@ -100,6 +100,34 @@ $exampleList.on("click", ".delete", handleDeleteBtnClick);
 
 //when the search button is clicked, it calls the post route that then calls the igdb api.
 $(document).ready(function () {
+  $(".save-user-data").on("click", function (cb) {
+    var avatar = "./images/default-avatar.png";;
+    var backgroundimage = "./images/default-background.png";
+    var accentcolor = $("#inputColor").val().trim()
+    if($("#inputAvatar").val().trim()===""){
+      avatar = $("#inputAvatar").attr("placeholder");
+    }
+    else{
+      avatar = $("#inputAvatar").val().trim();
+    }
+    if($("#inputBackground").val().trim()===""){
+      backgroundimage = $("#inputBackground").attr("placeholder");
+    }
+    else{
+      backgroundimage = $("#inputBackground").val().trim();
+    }
+    $.post("/api/update_user", {
+      avatar: avatar,
+      backgroundimage: backgroundimage,
+      accentcolor: $("#inputColor").val().trim()
+    }).then(function (results) {
+      $("body").css("background-image", "url('"+backgroundimage+"')");
+      $('.accentColor').attr('style', 'background-color:' +accentcolor+' !important');
+      $('#userAvatar').attr('src',avatar);      
+    })
+  });
+
+
   $("#searchButton").on("click", function (cb) {
     event.preventDefault();
 
@@ -111,7 +139,6 @@ $(document).ready(function () {
       .then(function (results) {
         // console.log("This is the result: " + results.length);
         $("#searchModalInsertion").empty();
-
         $("#addLibrary").attr("onclick", "").unbind("click");
         for (let i = 0; i < results.length; i++) {
           $("#searchModalInsertion").append("<h2>" + results[i].name + "</h2>");
@@ -124,7 +151,6 @@ $(document).ready(function () {
           event.preventDefault();
           // console.log("Hello");
           // console.log($(this).attr("data-gameID"));
-
           getTitle($(this).attr("data-gameID"));
         });
       })
