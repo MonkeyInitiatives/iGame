@@ -5,6 +5,8 @@ $(document).ready(function () {
     let passwordInput = $("input#password");
     let confirmPassword = $("input#password2");
     console.log("register user clicked");
+
+    
     signupForm.on("submit", (event) => {
         console.log("BUTTON CLICKED")
         event.preventDefault();
@@ -33,7 +35,7 @@ $(document).ready(function () {
                 password: password
             }).then(function (results) {
                 console.log(results);
-                // window.location.href = "/";
+                window.location.href = "/login";
             })
             // "/signup", {
             // name: name,
