@@ -4,11 +4,13 @@
 .wrapper-login{
   max-width: 256px;
 }
-body{
-  background-color: black;
-  /* height: 100%;  */
-  /* overflow: hidden; */
-}
+
+/* body {
+   background-color: black; 
+   height: 100%;  
+   overflow: hidden; 
+ }*/
+
 .row{
   /* max-height: 50%; */
   padding: 20px;
@@ -32,4 +34,13 @@ body{
   padding-top: 10px;
   padding-bottom: 10px;
   max-width: 240px;
+}
+
+/* Style the video: 100% width and height to cover the entire window */
+#myVideo {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%; 
+  min-height: 100%;
 }
