@@ -10,17 +10,17 @@
                   background-size: 100vw 100vh;
               }
           </style>
-          <nav class="navbar navbar-light bg-light justify-content-between accentColor" style="background-color:{{accentcolor}} !important;">
+          <nav class="navbar navbar-light bg-light justify-content-between accentColor rounded" style="background-color:{{accentcolor}} !important;">
         {{/each}}
-          <input class="form-control mr-sm-2" id="searchText" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success my-2 my-sm-0" id="searchButton" type="submit">Search</button>
-          <a class="navbar-brand" data-toggle="modal" data-target="#userModal">Account</a>
+          <input class="form-control mr-sm-2 rounded" id="searchText" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-primary text-center rounded" id="searchButton" type="submit">Search</button>
+          <button type="button" class="settings btn btn-primary text-center rounded"><a class="navbar-brand" data-toggle="modal" data-target="#userModal">Account Settings</a></button>
         </nav>
       </div>
     </div>
     <div class="row">
       <div class="col-sm-8">
-        <div class="wrapper" id="gamelist-wrapper">
+        <div class="wrapper rounded accentColor" id="gamelist-wrapper">
           <h1>Game Library</h1>
           <input id="basics" />
           {{#each games}}
@@ -29,7 +29,7 @@
         </div>
       </div>
       <div class="col-sm-4">
-        <div class="wrapper" id="friendlist-wrapper">
+        <div class="wrapper rounded accentColor" id="friendlist-wrapper">
           {{> friends/friendlist-block}}
         </div>
       </div>
