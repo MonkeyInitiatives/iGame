@@ -19,18 +19,29 @@ module.exports = function (app) {
           UserId: req.user.id
         }
       }).then((data) => {
-        let hbsObject = {
-          games: data,
-          user: [{
-            userID: req.user.id,
-            userName: req.user.name,
-            email: req.user.email,
-            avatar: req.user.avatar,
-            backgroundimage: req.user.backgroundimage,
-            accentcolor: req.user.accentcolor
-          }]
-        }
-        res.render("index", hbsObject);
+        // let hbsObject = {
+        //   games: data,
+        //   user: [{
+        //     userID: req.user.id,
+        //     userName: req.user.name,
+        //     email: req.user.email,
+        //     avatar: req.user.avatar,
+        //     backgroundimage: req.user.backgroundimage,
+        //     accentcolor: req.user.accentcolor
+        //   }]
+        // }
+        db.User.findAll({
+          where: {
+            id: req.user.id
+          }
+        }).then((userdata) => {
+          let hbsObject = {
+               games: data,
+               user: userdata
+          };
+          res.render("index", hbsObject);
+        });
+        
       });
     }
   });
