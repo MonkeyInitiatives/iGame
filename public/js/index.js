@@ -157,6 +157,17 @@ $(document).ready(function () {
     })
   });
 
+  $("#friendButton").on("click", function (cb) {
+    event.preventDefault();
+    $.ajax({
+      method: "POST",
+      url: "/api/friends/" + $("#friendText").val().trim()
+    }).then(function (results) {
+      console.log(results);
+    });
+
+  });
+
 
   $("#searchButton").on("click", function (cb) {
     event.preventDefault();
