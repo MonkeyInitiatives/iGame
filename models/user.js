@@ -38,8 +38,11 @@ module.exports = function (sequelize, DataTypes) {
     User.associate = function (models) {
         User.hasMany(models.Game, {
           onDelete: "cascade"
-    });
-      };
+        });
+        User.hasMany(models.Friend, {
+        onDelete: "cascade"
+        });
+    };
 
     // checking if password is valid
     User.prototype.validPassword = function (password) {
