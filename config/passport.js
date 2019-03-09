@@ -4,7 +4,6 @@ let LocalStrategy = require("passport-local").Strategy;
 // Load Models
 let db = require("../models");
 
-// module.exports = function (passport) {
 passport.use(new LocalStrategy({
         usernameField: "email"
     },
@@ -34,6 +33,5 @@ passport.serializeUser(function (user, cb) {
 passport.deserializeUser(function (obj, cb) {
     cb(null, obj);
 });
-// }
 
 module.exports = passport;

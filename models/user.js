@@ -20,12 +20,12 @@ module.exports = function (sequelize, DataTypes) {
             }
         },
         avatar: {
-            type: DataTypes.STRING,
+            type: DataTypes.TEXT,
             allowNull: false,
             defaultValue: "./images/default-avatar.png"
         },
         backgroundimage: {
-            type: DataTypes.STRING,
+            type: DataTypes.TEXT,
             allowNull: false,
             defaultValue: "./images/default-background.png"
         },
