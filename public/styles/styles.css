@@ -37,12 +37,14 @@
   min-height: 500px;
   max-height: 75%;
   overflow-y: scroll;
+  padding: 4%;
 }
 #gamelist-wrapper{
   background-color: white;
   min-height: 500px;
   max-height: 75%;
   overflow-y: scroll;
+  padding: 4%;
 }
 .game-box{
   display: block;
@@ -132,4 +134,13 @@ label{
 
 .intro-box {
 opacity: 0.9;
+}
+
+#search-text {
+  width: 100%;
+}
+
+.settings {
+margin: 1%;
+padding-right: 0%;
 }
