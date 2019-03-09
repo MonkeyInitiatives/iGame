@@ -5,7 +5,7 @@
   max-width: 256px;
 }
 
-.fade-box{
+/* .fade-box{
   -webkit-animation: 6s ease 0s normal forwards 1 fadein;
   animation: 6s ease 0s normal forwards 1 fadein;
 }
@@ -20,7 +20,7 @@
   0% { opacity:0; }
   70% { opacity:0; }
   100% { opacity:1; }
-}
+} */
 
 /* body {
    background-color: black; 
