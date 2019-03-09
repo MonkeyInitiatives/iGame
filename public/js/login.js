@@ -1,4 +1,6 @@
 $(document).ready(function () {
+
+    // Get references to page elements
     let loginForm = $("form.login");
     let emailInput = $("input#email");
     let passwordInput = $("input#password");
@@ -7,15 +9,15 @@ $(document).ready(function () {
     loginForm.on("submit", (event) => {
         event.preventDefault();
         var userData = {
-          email: emailInput.val().trim(),
-          password: passwordInput.val().trim()
+            email: emailInput.val().trim(),
+            password: passwordInput.val().trim()
         };
-    
+
         if (!userData.email || !userData.password) {
-          //console.log("I'm here");
-          return;
+            //console.log("I'm here");
+            return;
         }
-    
+
         // If we have an email and password we run the loginUser function and clear the form
         loginUser(userData.email, userData.password);
         emailInput.val("");
@@ -28,7 +30,7 @@ $(document).ready(function () {
                 email: email,
                 password: password
             }).then(function (results) {
-               // console.log(results);
+                // console.log(results);
                 window.location.replace("/library");
             })
             // "/signup", {
