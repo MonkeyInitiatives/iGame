@@ -1,12 +1,19 @@
 <h1><i class="fas fa-comments" style="color: #571c79"></i> Friend Chat</h1>
 
+
 <div id="chatbox">
+    {{#each user}}
     <div id="chat-window">
+        <div id="chat-feedback"></div>
         <div id="chat-output"></div>
     </div>
-    <input id="chat-name" type="text" placeholder="Name">
+    <div id="chat-name">
+        {{name}}
+        {{!-- <input id="chat-name" type="text" placeholder={{name}}> --}}
+    </div>
     <input id="chat-message" type="text" placeholder="Message">
     <button id="chat-send-btn">Send</button>
+    {{/each}}
 </div>
 
 <script src="/js/chat.js"></script>
