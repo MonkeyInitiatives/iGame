@@ -5,6 +5,23 @@
   max-width: 256px;
 }
 
+.fade-box{
+  -webkit-animation: 6s ease 0s normal forwards 1 fadein;
+  animation: 6s ease 0s normal forwards 1 fadein;
+}
+
+@keyframes fadein{
+  0% { opacity:0; }
+  70% { opacity:0; }
+  100% { opacity:1; }
+}
+
+@-webkit-keyframes fadein{
+  0% { opacity:0; }
+  70% { opacity:0; }
+  100% { opacity:1; }
+}
+
 /* body {
    background-color: black; 
    height: 100%;  
@@ -43,6 +60,8 @@
   bottom: 0;
   min-width: 100%; 
   min-height: 100%;
+  transform: translateX(calc((100% - 100vw) / 2));
+
 }
 
 /* Chat Box */
