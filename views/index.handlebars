@@ -4,28 +4,34 @@
       <div class="col">
         {{#each user}}
         <style>
-              body {
-                  background-image:url({{backgroundimage}});
-                  background-repeat: no-repeat;
-                  background-size: 100vw 100vh;
-              }
-          </style>
-          <nav class="navbar navbar-light bg-light justify-content-between accentColor rounded" style="background-color:{{accentcolor}} !important;">
-        {{/each}}
-          <input class="form-control mr-sm-2 rounded" id="searchText" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-primary text-center rounded" id="searchButton" type="submit">Search</button>
-          <button type="button" class="settings btn btn-primary text-center rounded"><a class="navbar-brand" data-toggle="modal" data-target="#userModal">Account Settings</a></button>
+          body {
+            background-image:url({{backgroundimage}});
+            background-repeat: no-repeat;
+            background-size: 100vw 100vh;
+          }
+        </style>
+        <nav class="navbar navbar-light bg-light justify-content-between accentColor rounded"
+          style="background-color:{{accentcolor}} !important;">
+          {{/each}}
+          <img src="./images/logo.png" class="logo">
+          <button type="button" class="settings btn btn-primary text-center rounded"><a class="navbar-brand"
+              data-toggle="modal" data-target="#userModal">Account</a>
+          </button>
+          </button>
+          <input class="form-control rounded" id="searchText" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-primary text-center rounded btn-lg" id="searchButton" type="submit">Search
+          </button>
         </nav>
       </div>
     </div>
     <div class="row">
-      <div class="col-sm-8">
+      <div class="col-sm">
         <div class="wrapper rounded accentColor" id="gamelist-wrapper">
           <h1>Game Library</h1>
           <input id="basics" />
           {{#each games}}
-            {{> games/gamelist-block}}
-          {{/each}}       
+          {{> games/gamelist-block}}
+          {{/each}}
         </div>
       </div>
       <div class="col-sm-4">
@@ -36,23 +42,22 @@
     </div>
   </div>
   {{> modals/usermodal-block}}
-  
+
   <div class="modal fade" id="searchModal" role="dialog">
     <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title">Search Results</h1>
-            </div>
-            <div class="modal-body" id="searchModalInsertion"> 
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title">Search Results</h1>
+        </div>
+        <div class="modal-body" id="searchModalInsertion">
 
-            </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div> 
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
     </div>
-</div>
+  </div>
 </div>
 
 {{!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
