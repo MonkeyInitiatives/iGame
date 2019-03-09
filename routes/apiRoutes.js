@@ -157,12 +157,49 @@ module.exports = function (app) {
       });
   });
 
+  app.get("/api/friends/", function (req, res) {
+    db.Friend.findAll({
+      where: {
+        friendID: req.user.id
+      }
+    }).then(response => {
+      // console.log(response.data);
+      res.json(response);
+    })
+    .catch(err => {
+      console.error(err);
+    });
+  });
+
+  app.post("/api/friends/:email", function (req, res) {
+    console.log("Starting post");
+    db.User.findAll({
+      where: {
+        email: req.params.email
+      }
+    }).then(response => {
+      // console.log(response[0].dataValues.id);
+      db.Friend.create({
+        status: "pending",
+        friendID: req.user.id,
+        UserId: response[0].dataValues.id
+      }).then(response2 => {
+        // console.log(response2.data);
+        // console.log(response.data);
+      })
+      .catch(err => {
+        console.error(err);
+      });
+    })
+    .catch(err => {
+      console.error(err);
+    });
+    
+  });
+
   // Delete games, not implemented right now.
   app.delete("/api/games/delete/:id", function (req, res) {
     db.Game.destroy({
-      where: {
-        id: req.params.id
-      }
     }).then(() => {
       res.redirect("/");
     });

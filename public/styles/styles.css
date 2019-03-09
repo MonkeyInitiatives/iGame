@@ -22,11 +22,9 @@
   100% { opacity:1; }
 } */
 
-/* body {
-   background-color: black; 
-   height: 100%;  
-   overflow: hidden; 
- }*/
+body {
+   background-size: cover;
+ }
 
 .row{
   /* max-height: 50%; */
@@ -37,12 +35,15 @@
   min-height: 500px;
   max-height: 75%;
   overflow-y: scroll;
+  padding: 4%;
 }
 #gamelist-wrapper{
   background-color: white;
   min-height: 500px;
   max-height: 75%;
   overflow-y: scroll;
+  padding: 4%;
+  margin-bottom: 10%;
 }
 .game-box{
   display: block;
@@ -128,4 +129,23 @@ label{
 
 .intro-box {
 opacity: 0.9;
+}
+
+#search-text {
+  width: 100%;
+}
+
+.settings {
+margin-top: 1%;
+padding-right: 0%;
+}
+
+#searchButton {
+  margin-top: 1%;
+}
+
+.logo {
+  width: 10%;
+  margin-left: 45%;
+  margin-bottom: 1%;
 }
