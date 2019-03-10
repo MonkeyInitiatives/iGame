@@ -5,23 +5,6 @@
   max-width: 256px;
 }
 
-/* .fade-box{
-  -webkit-animation: 6s ease 0s normal forwards 1 fadein;
-  animation: 6s ease 0s normal forwards 1 fadein;
-}
-
-@keyframes fadein{
-  0% { opacity:0; }
-  70% { opacity:0; }
-  100% { opacity:1; }
-}
-
-@-webkit-keyframes fadein{
-  0% { opacity:0; }
-  70% { opacity:0; }
-  100% { opacity:1; }
-} */
-
 body {
    background-size: cover;
  }
@@ -33,27 +16,48 @@ body {
 #friendlist-wrapper{
   background-color: white;
   min-height: 500px;
-  max-height: 75%;
+  /* max-height: 75%; */
   overflow-y: scroll;
-  padding: 4%;
+  /* padding: 4%; */
 }
 #gamelist-wrapper{
   background-color: white;
-  min-height: 500px;
-  max-height: 75%;
-  overflow-y: scroll;
-  padding: 4%;
-  margin-bottom: 10%;
+  /* min-height: 500px;
+  max-height: 75%; */
+  /* overflow-y: scroll; */
+  /* padding: 4%; */
+  /* margin-bottom: 10%; */
+
+  width: 100%;
+  overflow-x: auto;
+  white-space: nowrap;
 }
 .game-box{
-  display: block;
+  display:inline-block;
   margin-left: auto;
   margin-right: auto;
-  padding-top: 10px;
-  padding-bottom: 10px;
+  padding: 20px;
+  max-height: 320px;
+}
+.game-box-modal{
+  display:block;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 20px;
   max-width: 240px;
 }
 
+.modal-body{
+  white-space: normal;
+}
+
+.addFriend, .rejectFriend {
+  display:inline-block;
+  /**other codes**/
+  }
+.friend-requests{
+  display: inline-block;
+}
 /* Style the video: 100% width and height to cover the entire window */
 #myVideo {
   position: fixed;

@@ -3,7 +3,9 @@ let Sequelize = require("sequelize");
 module.exports = function (sequelize, DataTypes) {
   let Friend = sequelize.define("Friend", {
     status: DataTypes.STRING,
-    friendID: DataTypes.INTEGER
+    requestName: DataTypes.STRING,
+    requestID: DataTypes.INTEGER,
+    FriendName: DataTypes.STRING
   });
   
   Friend.associate = function (models) {

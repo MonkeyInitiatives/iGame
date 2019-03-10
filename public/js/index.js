@@ -101,6 +101,62 @@ $exampleList.on("click", ".delete", handleDeleteBtnClick);
 //when the search button is clicked, it calls the post route that then calls the igdb api.
 $(document).ready(function () {
 
+  $('.friend-list').each(function() {
+    if($(this).attr("data-friendStatus")==="rejected"){
+      $(this).hide();
+    }
+    else if($(this).attr("data-friendStatus")==="accepted"){
+      $(this).append("<button type='button' class='btn btn-primary text-center rounded my-2 my-sm-0 showFriendLibrary' data-requestID=" + $(this).attr("data-requestID") + ">"+$(this).attr("data-requestName")+"'s Library</button>");
+    }
+    else if($(this).attr("data-friendStatus")==="pending"){
+      $(this).prepend("Pending: "+$(this).attr("data-requestName"));
+    }
+  });
+  $('.friend-requests').each(function() {
+    if($(this).attr("data-friendStatus")==="pending" && ($(this).attr("data-requestID")!==$(this).attr("data-userID"))){
+      $(this).append("<button type='button' class='btn btn-primary text-center rounded my-2 my-sm-0 rejectFriend' data-userID=" + $(this).attr("data-userID") + " data-requestID=" + $(this).attr("data-requestID") + " data-requestName=" + $(this).attr("data-requestName") + ">Reject</button>");
+      $(this).append("<button type='button' class='btn btn-primary text-center rounded my-2 my-sm-0 addFriend' data-userID=" + $(this).attr("data-userID") + " data-requestID=" + $(this).attr("data-requestID") + " data-requestName=" + $(this).attr("data-requestName") + ">Accept</button>");
+    }
+    else if($(this).attr("data-requestID")!==$(this).attr("data-userID")){
+      $(this).remove();
+    }
+  });
+
+  $(".showFriendLibrary").on("click", function (cb) {
+    console.log($(this).attr("data-requestID"));
+    $.post("/api/friends/library/", {
+      friendID: $(this).attr("data-requestID")
+    }).then(function (results) {
+      console.log(results);
+      $("#friendModalInsertion").empty();
+      for(var i = 0; i<results.length; i++){
+        $("#friendModalInsertion").append(results[i].name+"<br />");
+      }
+      $("#friendModal").modal("toggle");
+    });
+  });
+
+  $(".addFriend").on("click", function (cb) {
+    console.log("My ID: "+$(this).attr("data-userID"));
+    console.log("Friend ID: "+$(this).attr("data-requestID"));
+    console.log("add friend");
+    $.post("/api/friends/add/", {
+      userID: $(this).attr("data-userID"),
+      requestID: $(this).attr("data-requestID"),
+      requestName: $(this).attr("data-requestName")
+    }).then(function (results) {
+      window.location.href = "/library";
+    })
+  });
+  $(".rejectFriend").on("click", function (cb) {
+    $.post("/api/friends/reject/", {
+      requestID: $(this).attr("data-requestID"),
+      userID: $(this).attr("data-userID")
+    }).then(function (results) {
+      window.location.href = "/library";
+    })
+  });
+
   var options = {
     data: [],
     getValue: function(element) {
