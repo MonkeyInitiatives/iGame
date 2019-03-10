@@ -41,7 +41,7 @@ module.exports = function (app) {
                 friendrequests: friendrequests
               };
               console.log("Is this not logging?");
-              console.log(hbsObject.friendrequests);
+              console.log(hbsObject.user.accentcolor);
               res.render("index", hbsObject);
             });
           });

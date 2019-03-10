@@ -106,16 +106,16 @@ $(document).ready(function () {
       $(this).hide();
     }
     else if($(this).attr("data-friendStatus")==="accepted"){
-      $(this).append("<button type='button' class='btn btn-outline-success my-2 my-sm-0 showFriendLibrary' data-requestID=" + $(this).attr("data-requestID") + ">Display Library</button>");
+      $(this).append("<button type='button' class='btn btn-primary text-center rounded my-2 my-sm-0 showFriendLibrary' data-requestID=" + $(this).attr("data-requestID") + ">"+$(this).attr("data-requestName")+"'s Library</button>");
     }
     else if($(this).attr("data-friendStatus")==="pending"){
-      $(this).prepend("Pending: ");
+      $(this).prepend("Pending: "+$(this).attr("data-requestName"));
     }
   });
   $('.friend-requests').each(function() {
     if($(this).attr("data-friendStatus")==="pending" && ($(this).attr("data-requestID")!==$(this).attr("data-userID"))){
-      $(this).append("<button type='button' class='btn btn-outline-success my-2 my-sm-0 addFriend' data-userID=" + $(this).attr("data-userID") + " data-requestID=" + $(this).attr("data-requestID") + " data-requestName=" + $(this).attr("data-requestName") + ">Accept</button>");
-      $(this).append("<button type='button' class='btn btn-outline-success my-2 my-sm-0 rejectFriend' data-userID=" + $(this).attr("data-userID") + " data-requestID=" + $(this).attr("data-requestID") + " data-requestName=" + $(this).attr("data-requestName") + ">reject</button>");
+      $(this).append("<button type='button' class='btn btn-primary text-center rounded my-2 my-sm-0 rejectFriend' data-userID=" + $(this).attr("data-userID") + " data-requestID=" + $(this).attr("data-requestID") + " data-requestName=" + $(this).attr("data-requestName") + ">Reject</button>");
+      $(this).append("<button type='button' class='btn btn-primary text-center rounded my-2 my-sm-0 addFriend' data-userID=" + $(this).attr("data-userID") + " data-requestID=" + $(this).attr("data-requestID") + " data-requestName=" + $(this).attr("data-requestName") + ">Accept</button>");
     }
     else if($(this).attr("data-requestID")!==$(this).attr("data-userID")){
       $(this).remove();

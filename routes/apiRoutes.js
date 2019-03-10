@@ -197,6 +197,7 @@ module.exports = function (app) {
         FriendName: req.body.requestName,
         requestName: req.user.name
       }).then(response2 => {
+        res.json("/library");
         // console.log(response2.data);
         // console.log(response.data);
       })
@@ -209,6 +210,8 @@ module.exports = function (app) {
     console.log(req.body.requestID);
     db.Friend.destroy({
       where: { requestID: req.body.requestID, userId: req.body.userID }
+    }).then(response => {
+      res.json("/library");
     });
   });
 
@@ -227,6 +230,7 @@ module.exports = function (app) {
         FriendName: response[0].dataValues.name,
         requestName: req.user.name
       }).then(response2 => {
+        res.json("/library");
         // console.log(response2.data);
         // console.log(response.data);
       })
