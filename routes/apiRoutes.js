@@ -57,6 +57,17 @@ module.exports = function (app) {
     });
 
   });
+  app.post("/api/friends/library", function (req, res) {
+    console.log(req.body.friendID);
+    db.Game.findAll({
+      where: {
+        UserId: req.body.friendID
+      }
+    }).then((data) => {
+      res.json(data);
+    });
+});
+  
 
   app.get("/api/user_data", function(req, res) {
     if (!req.user) {
@@ -171,6 +182,36 @@ module.exports = function (app) {
     });
   });
 
+  app.post("/api/friends/add/", function (req, res) {
+    console.log(req.body.userID);
+    console.log(req.body.requestID);
+    db.Friend.update(
+      { status: 'accepted' }, 
+      { where: { requestID: req.body.requestID, userId: req.body.userID },
+    } 
+    ).then(() => {
+      db.Friend.create({
+        status: "accepted",
+        requestID: req.user.id,
+        UserId: req.body.requestID,
+        FriendName: req.body.requestName,
+        requestName: req.user.name
+      }).then(response2 => {
+        // console.log(response2.data);
+        // console.log(response.data);
+      })
+      .catch(err => {
+        console.error(err);
+      });
+    });
+  });
+  app.post("/api/friends/reject/", function (req, res) {
+    console.log(req.body.requestID);
+    db.Friend.destroy({
+      where: { requestID: req.body.requestID, userId: req.body.userID }
+    });
+  });
+
   app.post("/api/friends/:email", function (req, res) {
     console.log("Starting post");
     db.User.findAll({
@@ -181,8 +222,10 @@ module.exports = function (app) {
       // console.log(response[0].dataValues.id);
       db.Friend.create({
         status: "pending",
-        friendID: req.user.id,
-        UserId: response[0].dataValues.id
+        requestID: req.user.id,
+        UserId: response[0].dataValues.id,
+        FriendName: response[0].dataValues.name,
+        requestName: req.user.name
       }).then(response2 => {
         // console.log(response2.data);
         // console.log(response.data);

@@ -36,9 +36,16 @@
       </div>
       <div class="col-sm-4">
         <div class="wrapper rounded accentColor" id="friendlist-wrapper">
-          <input class="form-control mr-sm-2" id="friendText" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success my-2 my-sm-0" id="friendButton" type="submit">Search</button>
-
+          <input class="form-control mr-sm-2" id="friendText" type="search" placeholder="Add Friend" aria-label="Search">
+          <button class="btn btn-outline-success my-2 my-sm-0" id="friendButton" type="submit">Add Friend</button>
+          <h4>Friends</h4>
+          {{#each friends}}
+            {{> friends/friends-block}}
+          {{/each}}
+          <h4>Requests</h4>
+          {{#each friendrequests}}
+            {{> friends/friendrequests-block}}
+          {{/each}}
           {{> friends/friendlist-block}}
         </div>
       </div>
@@ -53,6 +60,21 @@
           <h1 class="modal-title">Search Results</h1>
         </div>
         <div class="modal-body" id="searchModalInsertion">
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="friendModal" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title">Friend Library</h1>
+        </div>
+        <div class="modal-body" id="friendModalInsertion">
 
         </div>
         <div class="modal-footer">
