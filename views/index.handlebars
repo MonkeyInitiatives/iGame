@@ -14,31 +14,42 @@
           style="background-color:{{accentcolor}} !important;">
           {{/each}}
           <img src="./images/logo.png" class="logo">
-          <button type="button" class="settings btn btn-primary text-center rounded"><a class="navbar-brand"
+          <button type="button" class="settings btn btn-primary text-center rounded my-2 my-sm-0"><a class="navbar-brand"
               data-toggle="modal" data-target="#userModal">Account</a>
           </button>
           </button>
           <input class="form-control rounded" id="searchText" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-primary text-center rounded btn-lg" id="searchButton" type="submit">Search
+          <button class="btn btn-primary text-center rounded my-2 my-sm-0" id="searchButton" type="submit">Search
           </button>
         </nav>
       </div>
     </div>
     <div class="row">
-      <div class="col-sm">
-        <div class="wrapper rounded accentColor" id="gamelist-wrapper">
-          <h1>Game Library</h1>
+      <div class="col-sm-8">
+        <div class="row">
+          {{!-- <h1>Game Library</h1> --}}
           <input id="basics" />
-          {{#each games}}
-          {{> games/gamelist-block}}
-          {{/each}}
+        </div>
+        <div class="row">
+          <div class="wrapper rounded accentColor" id="gamelist-wrapper" style="background-color:{{accentcolor}} !important;">
+            {{#each games}}
+            {{> games/gamelist-block}}
+            {{/each}}
+          </div>
         </div>
       </div>
       <div class="col-sm-4">
-        <div class="wrapper rounded accentColor" id="friendlist-wrapper">
-          <input class="form-control mr-sm-2" id="friendText" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success my-2 my-sm-0" id="friendButton" type="submit">Search</button>
-
+        <div class="wrapper rounded accentColor" style="background-color:{{accentcolor}} !important;" id="friendlist-wrapper">
+          <input class="form-control mr-sm-2" id="friendText" type="search" placeholder="Search by email" aria-label="Search">
+          <button class="btn btn-primary text-center rounded my-2 my-sm-0" id="friendButton" type="submit">Request Friendship</button>
+          <h4>Friends</h4>
+          {{#each friends}}
+            {{> friends/friends-block}}
+          {{/each}}
+          {{!-- <h4>Requests</h4> --}}
+          {{#each friendrequests}}
+            {{> friends/friendrequests-block}}
+          {{/each}}
           {{> friends/friendlist-block}}
         </div>
       </div>
@@ -53,6 +64,21 @@
           <h1 class="modal-title">Search Results</h1>
         </div>
         <div class="modal-body" id="searchModalInsertion">
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="friendModal" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title">Friend Library</h1>
+        </div>
+        <div class="modal-body" id="friendModalInsertion">
 
         </div>
         <div class="modal-footer">
