@@ -1,4 +1,5 @@
 $(document).ready(function () {
+
     // Make connection on front end
     let socket = io();
 
@@ -12,29 +13,28 @@ $(document).ready(function () {
     // Emit events
     chatSendBtn.on("click", function (e) {
         e.preventDefault();
-
-        console.log("CHAT BUTTON CLICKED");
         socket.emit("chat", {
-            chatName: chatName.text(),
+            chatName: chatName.val(),
             chatMessage: chatMessage.val()
         });
+        chatMessage.val("");
     });
 
     // Check if user is typing
     chatMessage.keypress(function () {
-        socket.emit("typing", chatName.text())
+        socket.emit("typing", chatName.val())
     });
 
     // Listen for events 
     socket.on("chat", function (data) {
-        console.log(data)
+        // console.log(data)
         // output data to DOM
-        chatOutput.append($('<p>').text(chatName.text() + ": " + data.chatMessage));
-        chatMessage.val("");
-        chatFeedback.text("");    });
+        chatFeedback.val("");
+        chatOutput.append($('<p>').text(data.chatName + ": " + data.chatMessage));
+    });
 
     socket.on("typing", function (data) {
-        chatFeedback.text(chatName.text() + " is typing a message...");
-        console.log("chatname: " + data.chatName)
+        chatFeedback.text(data + " is typing a message...");
+        // console.log("chatname: " + data)
     });
 });
