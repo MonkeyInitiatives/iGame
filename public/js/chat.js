@@ -18,23 +18,23 @@ $(document).ready(function () {
             chatName: chatName.text(),
             chatMessage: chatMessage.val()
         });
-        chatMessage.val();
     });
 
     // Check if user is typing
     chatMessage.keypress(function () {
-        socket.emit("typing", data.chatName)
+        socket.emit("typing", chatName.text())
     });
 
     // Listen for events 
     socket.on("chat", function (data) {
         console.log(data)
         // output data to DOM
-        chatOutput.text(data.chatName + ": " + data.chatMessage);
-    });
+        chatOutput.append($('<p>').text(chatName.text() + ": " + data.chatMessage));
+        chatMessage.val("");
+        chatFeedback.text("");    });
 
     socket.on("typing", function (data) {
-        chatFeedback.text(chatName + " is typing a message...");
+        chatFeedback.text(chatName.text() + " is typing a message...");
         console.log("chatname: " + data.chatName)
     });
 });

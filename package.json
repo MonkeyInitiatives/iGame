@@ -1,5 +1,5 @@
 {
-  "name": "iGame",
+  "name": "igame",
   "version": "1.0.0",
   "description": "iGame Starter",
   "main": "server.js",
@@ -38,5 +38,17 @@
     "eslint-plugin-prettier": "^2.6.2",
     "mocha": "^5.2.0",
     "prettier": "^1.13.7"
-  }
+  },
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MonkeyInitiatives/iGame.git"
+  },
+  "author": "",
+  "bugs": {
+    "url": "https://github.com/MonkeyInitiatives/iGame/issues"
+  },
+  "homepage": "https://github.com/MonkeyInitiatives/iGame#readme"
 }
