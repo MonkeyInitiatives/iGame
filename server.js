@@ -12,9 +12,9 @@ var passport = require("./config/passport");
 var db = require("./models");
 
 // var app = express();
-var app = require('express')();
-var http = require('http').Server(app);
-var io = require('socket.io')(http);
+var app = require("express")();
+var http = require("http").Server(app);
+var io = require("socket.io")(http);
 var PORT = process.env.PORT || 3000;
 
 app.use(require("morgan")("combined"));
@@ -42,9 +42,11 @@ app.use(express.static("public"));
 // Socket setup
 var io = socket(http);
 
+const history = [];
 io.on("connection", function (socket) {
   // testing connection
   console.log("\nmade socket connection. Socket ID: ", socket.id + "\n\n");
+
   socket.on("chat", function (data) {
     io.sockets.emit("chat", data);
     console.log("data: ", data)
