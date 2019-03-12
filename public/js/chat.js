@@ -17,18 +17,23 @@ $(document).ready(function () {
             chatName: chatName.val(),
             chatMessage: chatMessage.val()
         });
+
         chatMessage.val("");
+
     });
 
     // Check if user is typing
     chatMessage.keypress(function () {
+
         socket.emit("typing", chatName.val())
+
     });
 
     // Listen for events 
     socket.on("chat", function (data) {
         // console.log(data)
         // output data to DOM
+
         chatFeedback.val("");
         chatOutput.append($('<p>').text(data.chatName + ": " + data.chatMessage));
     });
@@ -36,5 +41,6 @@ $(document).ready(function () {
     socket.on("typing", function (data) {
         chatFeedback.text(data + " is typing a message...");
         // console.log("chatname: " + data)
+
     });
 });
