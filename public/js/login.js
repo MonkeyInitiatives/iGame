@@ -29,9 +29,11 @@ $(document).ready(function () {
             $.post("/api/login", {
                 email: email,
                 password: password
-            }).then(function (results) {
+            }).done(function (results) {
                 // console.log(results);
                 window.location.replace("/library");
+            }).fail(function(error) {
+                $(".errors").show();
             })
             // "/signup", {
             // name: name,

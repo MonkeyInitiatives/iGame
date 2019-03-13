@@ -22,25 +22,29 @@ module.exports = function (app) {
       name: req.body.name,
       email: req.body.email,
       password: req.body.password
-    }).then(function(){
+    }).then(function () {
       // console.log("here?");
       res.redirect("/login");
     });
-    
+
   });
 
   // Login
-  app.post("/api/login", passport.authenticate("local"), function(req, res) {
-    // Since we're doing a POST with javascript, we can't actually redirect that post into a GET request
-    // So we're sending the user back the route to the members page because the redirect will happen on the front end
-    // They won't get this or even be able to access this page if they aren't authed
-    res.json("/library");
-  });
+  app.post("/api/login", passport.authenticate("local", {
+    // successRedirect: "/library",
+    failureRedirect: "/login",
+    failureFlash: true
+  }), function(req, res) {
+    res.json("/");
+  })
+  
+  // , function (req, res) {
+  //   res.json("/");
+  // });
 
   // Logout
   app.get("/logout", (req, res) => {
     req.logout();
-    // req.flash("success_msg", "You are logged out");
     res.render("welcome");
   });
 
@@ -50,9 +54,11 @@ module.exports = function (app) {
       avatar: req.body.avatar,
       backgroundimage: req.body.backgroundimage,
       accentcolor: req.body.accentcolor
-    },
-      {where:  { id: req.user.id }
-    }).then(function(){
+    }, {
+      where: {
+        id: req.user.id
+      }
+    }).then(function () {
       res.render("index");
     });
 
@@ -66,17 +72,15 @@ module.exports = function (app) {
     }).then((data) => {
       res.json(data);
     });
-});
-  
+  });
 
-  app.get("/api/user_data", function(req, res) {
+
+  app.get("/api/user_data", function (req, res) {
     if (!req.user) {
       // The user is not logged in, send back an empty object
       res.json({});
-    }
-    else {
+    } else {
       // Otherwise send back the user's email and id
-      // Sending back a password, even a hashed password, isn't a good idea
       res.json({
         email: req.user.email,
         id: req.user.id
@@ -89,7 +93,7 @@ module.exports = function (app) {
   GAME LIBRARY AND DATABASE ROUTES
 
   */
-  
+
   app.post("/api/games", (req, res) => {
     db.Game.create({
         game: req.params.game,
@@ -170,46 +174,52 @@ module.exports = function (app) {
 
   app.get("/api/friends/", function (req, res) {
     db.Friend.findAll({
-      where: {
-        friendID: req.user.id
-      }
-    }).then(response => {
-      // console.log(response.data);
-      res.json(response);
-    })
-    .catch(err => {
-      console.error(err);
-    });
+        where: {
+          friendID: req.user.id
+        }
+      }).then(response => {
+        // console.log(response.data);
+        res.json(response);
+      })
+      .catch(err => {
+        console.error(err);
+      });
   });
 
   app.post("/api/friends/add/", function (req, res) {
     console.log(req.body.userID);
     console.log(req.body.requestID);
-    db.Friend.update(
-      { status: 'accepted' }, 
-      { where: { requestID: req.body.requestID, userId: req.body.userID },
-    } 
-    ).then(() => {
+    db.Friend.update({
+      status: 'accepted'
+    }, {
+      where: {
+        requestID: req.body.requestID,
+        userId: req.body.userID
+      },
+    }).then(() => {
       db.Friend.create({
-        status: "accepted",
-        requestID: req.user.id,
-        UserId: req.body.requestID,
-        FriendName: req.body.requestName,
-        requestName: req.user.name
-      }).then(response2 => {
-        res.json("/library");
-        // console.log(response2.data);
-        // console.log(response.data);
-      })
-      .catch(err => {
-        console.error(err);
-      });
+          status: "accepted",
+          requestID: req.user.id,
+          UserId: req.body.requestID,
+          FriendName: req.body.requestName,
+          requestName: req.user.name
+        }).then(response2 => {
+          res.json("/library");
+          // console.log(response2.data);
+          // console.log(response.data);
+        })
+        .catch(err => {
+          console.error(err);
+        });
     });
   });
   app.post("/api/friends/reject/", function (req, res) {
     console.log(req.body.requestID);
     db.Friend.destroy({
-      where: { requestID: req.body.requestID, userId: req.body.userID }
+      where: {
+        requestID: req.body.requestID,
+        userId: req.body.userID
+      }
     }).then(response => {
       res.json("/library");
     });
@@ -218,36 +228,35 @@ module.exports = function (app) {
   app.post("/api/friends/:email", function (req, res) {
     console.log("Starting post");
     db.User.findAll({
-      where: {
-        email: req.params.email
-      }
-    }).then(response => {
-      // console.log(response[0].dataValues.id);
-      db.Friend.create({
-        status: "pending",
-        requestID: req.user.id,
-        UserId: response[0].dataValues.id,
-        FriendName: response[0].dataValues.name,
-        requestName: req.user.name
-      }).then(response2 => {
-        res.json("/library");
-        // console.log(response2.data);
-        // console.log(response.data);
+        where: {
+          email: req.params.email
+        }
+      }).then(response => {
+        // console.log(response[0].dataValues.id);
+        db.Friend.create({
+            status: "pending",
+            requestID: req.user.id,
+            UserId: response[0].dataValues.id,
+            FriendName: response[0].dataValues.name,
+            requestName: req.user.name
+          }).then(response2 => {
+            res.json("/library");
+            // console.log(response2.data);
+            // console.log(response.data);
+          })
+          .catch(err => {
+            console.error(err);
+          });
       })
       .catch(err => {
         console.error(err);
       });
-    })
-    .catch(err => {
-      console.error(err);
-    });
-    
+
   });
 
   // Delete games, not implemented right now.
   app.delete("/api/games/delete/:id", function (req, res) {
-    db.Game.destroy({
-    }).then(() => {
+    db.Game.destroy({}).then(() => {
       res.redirect("/");
     });
   });

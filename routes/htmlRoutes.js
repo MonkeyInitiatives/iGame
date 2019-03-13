@@ -2,18 +2,18 @@ let db = require("../models");
 let express = require("express");
 let router = express.Router();
 let path = require("path");
+let passport = require("../config/passport");
 
 // Requiring our custom middleware for checking if a user is logged in
 let isAuthenticated = require("../config/middleware/isAuthenticated");
 
 module.exports = function (app) {
 
-
   // Load library page and fills in game objects from database for specific user.
   app.get("/library", function (req, res) {
     if (!req.user) {
-      res.redirect("/")
-    } else {
+      res.redirect("/login")
+      } else {
       db.Game.findAll({
         where: {
           UserId: req.user.id
@@ -28,12 +28,12 @@ module.exports = function (app) {
             where: {
               requestID: req.user.id
             }
-          }).then((friendlist)=> {
+          }).then((friendlist) => {
             db.Friend.findAll({
               where: {
                 UserId: req.user.id
               }
-            }).then((friendrequests)=> {
+            }).then((friendrequests) => {
               let hbsObject = {
                 games: data,
                 user: userdata,
@@ -46,40 +46,49 @@ module.exports = function (app) {
             });
           });
         });
-        
       });
     }
   });
 
-  // Load login page unless user already signed in
+  // Load login page unless user's already signed in
   app.get("/login", function (req, res) {
     // If the user already has an account
+    console.log("checking for user:", req.user);
     if (req.user) {
       res.redirect("/library");
-    }
-    else{
-      res.render("login");
+    } else {
+      let flashMessages = res.locals.getMessages();
+      console.log("\nflash: ", flashMessages);
+
+      if (flashMessages.error) {
+        var theError = flashMessages.error;
+        // let theError = "DIS SUX"
+        console.log("Login screen with errors");
+        res.send(404).end();
+        console.log("\nthere was an error\n", theError[0]);
+      } 
+      else {
+        res.render("login");
+      }
     }
   });
 
   // Load signup unless logged in already
   app.get("/signup", function (req, res) {
     if (req.user) {
-      res.redirect("/library");
-    }
-    else{
+      res.redirect("index");
+    } else {
       res.render("signup");
     }
   });
 
   // Load welcome/start page or library if user is logged in
   app.get("/", (req, res) => {
-    if (req.user) {
-      res.redirect("/library");
-    }
-    else{
-      res.render("welcome");
-    }
+    // if (req.user) {
+    //   res.redirect("/library");
+    // } else {
+    res.render("welcome");
+    // }
   });
 
   // Load games 
