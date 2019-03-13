@@ -111,13 +111,6 @@ body {
   margin: 0 20px;
 }
 
-/* 
-label{
-  box-sizing: border-box;
-  display: block;
-  padding: 10px 20px;
-} */
-
 #chat-output {
   color: #000000;
 }
@@ -166,4 +159,16 @@ padding-right: 0%;
   width: 10%;
   margin-left: 45%;
   margin-bottom: 1%;
+}
+
+/* Flash Errors */
+.errors {
+  padding: 10px;
+  border: solid 1px #ff0000;
+  background-color: #ff000033;
+}
+
+.errors li {
+  color: #ff0000;
+  list-style-type: none;
 }

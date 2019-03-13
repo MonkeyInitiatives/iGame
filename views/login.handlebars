@@ -3,24 +3,29 @@
 </video>
 
 <div class="row mt-5">
-    <div class="intro-box col-md-6 m-auto">
-        <div class="card card-body">
-            <h1 class="text-center mb-3"><i class="fas fa-sign-in-alt" style="color: #571c79"></i> Login</h1>
-            <form class="login" action="/login" method="POST">
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email" class="form-control" placeholder="Enter Email" />
-                </div>
-                <div class="form-group">
-                    <label for="pas sword">Password</label>
-                    <input type="password" id="password" name="password" class="form-control"
-                        placeholder="Enter Password" />
-                </div>
-                <button type="submit" class="btn btn-primary btn-block">Login</button>
-            </form>
-            <p class="lead mt-4">
-                No Account? <a href="/signup">Register</a>
-            </p>
+  <div class="intro-box col-md-6 m-auto">
+    <div class="card card-body">
+      <h1 class="text-center mb-3"><i class="fas fa-sign-in-alt" style="color: #571c79"></i> Login</h1>
+      <form class="login" action="/login" method="POST">
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" class="form-control" placeholder="Enter Email" />
         </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" class="form-control" placeholder="Enter Password" />
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Login</button>
+      </form>
+      <br>
+
+      <ul class="errors" style="display:none;">
+        <p>The username/password is incorrect</p>
+      </ul>
+
+      <p class="lead mt-4">
+        No Account? <a href="/signup">Register</a>
+      </p>
     </div>
+  </div>
 </div>
