@@ -1,59 +1,63 @@
 <div id="home">
-  <div class="container">
+  <div class="container-fluid">
     <div class="row">
-      <div class="col">
+      <div class="col-lg-8">
         {{#each user}}
         <style>
           body {
             background-image:url({{backgroundimage}});
             background-repeat: no-repeat;
             background-size: 100vw 100vh;
+            background-attachment: fixed;
           }
         </style>
         <nav class="navbar navbar-light bg-light justify-content-between accentColor rounded"
-          style="background-color:{{accentcolor}} !important;">
+          style="background-image: url(./images/mario.gif), url(./images/pokemon.gif); background-attachment: fixed; background-size: 33vw 36.5vh;">
           {{/each}}
           <img src="./images/logo.png" class="logo">
-          <button type="button" class="settings btn btn-primary text-center rounded my-2 my-sm-0"><a class="navbar-brand"
-              data-toggle="modal" data-target="#userModal">Account</a>
           </button>
-          </button>
-          <input class="form-control rounded" id="searchText" type="search" placeholder="Search" aria-label="Search">
+          <input class="form-control rounded" id="searchText" type="search" placeholder="Search for games" aria-label="Search">
           <button class="btn btn-primary text-center rounded my-2 my-sm-0" id="searchButton" type="submit">Search
           </button>
+           <button type="button" class="settings btn btn-primary text-center rounded my-2 my-sm-0"><a
+              class="navbar-brand accountButton" data-toggle="modal" data-target="#userModal">Account</a>
+          </button>
         </nav>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-sm-8">
-        <div class="row">
-          {{!-- <h1>Game Library</h1> --}}
-          <input id="basics" />
+
+        {{!-- <h1>Game Library</h1> --}}
+        <br>
+        <div class="wrapper rounded justify-content-between accentColor bg-transparent" id="gamelist-wrapper"
+          style="background-color:{{accentcolor}} !important;">
+          <input id="basics"/>
+          <br>
+          {{#each games}}
+          {{> games/gamelist-block}}
+          {{/each}}
         </div>
-        <div class="row">
-          <div class="wrapper rounded accentColor" id="gamelist-wrapper" style="background-color:{{accentcolor}} !important;">
-            {{#each games}}
-            {{> games/gamelist-block}}
-            {{/each}}
-          </div>
-        </div>
+        <br>
       </div>
-      <div class="col-sm-4">
-        <div class="wrapper rounded accentColor" style="background-color:{{accentcolor}} !important;" id="friendlist-wrapper">
-          <input class="form-control mr-sm-2" id="friendText" type="search" placeholder="Search by email" aria-label="Search">
-          <button class="btn btn-primary text-center rounded my-2 my-sm-0" id="friendButton" type="submit">Request Friendship</button>
+      <div class="col-lg-4">
+        <div class="wrapper rounded accentColor" style="background-color:{{accentcolor}} !important;"
+          id="friendlist-wrapper">
+          <input class="form-control mr-sm-2" id="friendText" type="search" placeholder="Search by email"
+            aria-label="Search">
+          <button class="btn btn-primary text-center rounded my-2 my-sm-0" id="friendButton" type="submit">Request
+            Friendship</button>
+            <br>
+            <br>
           <h4>Friends</h4>
           {{#each friends}}
-            {{> friends/friends-block}}
+          {{> friends/friends-block}}
           {{/each}}
           {{!-- <h4>Requests</h4> --}}
           {{#each friendrequests}}
-            {{> friends/friendrequests-block}}
+          {{> friends/friendrequests-block}}
           {{/each}}
           {{> friends/friendlist-block}}
         </div>
       </div>
     </div>
+
   </div>
   {{> modals/usermodal-block}}
 

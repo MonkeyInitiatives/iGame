@@ -7,7 +7,19 @@
 
 body {
    background-size: cover;
+   margin: 0 auto;
  }
+
+.mario{
+   background-image: url("./images/mario.gif");
+   background-attachment: fixed;
+   background-size: 100%;
+   background-size: 100vw
+ }
+
+#basics {
+  position: fixed;
+}
 
 .row{
   /* max-height: 50%; */
@@ -18,14 +30,16 @@ body {
   min-height: 500px;
   /* max-height: 75%; */
   overflow-y: scroll;
-  /* padding: 4%; */
+  padding: 4%;
+  margin-right: 0;
 }
+
 #gamelist-wrapper{
   background-color: white;
   /* min-height: 500px;
   max-height: 75%; */
   /* overflow-y: scroll; */
-  /* padding: 4%; */
+  padding: 2%;
   /* margin-bottom: 10%; */
 
   width: 100%;
@@ -44,7 +58,7 @@ body {
   margin-left: auto;
   margin-right: auto;
   padding: 20px;
-  max-width: 240px;
+  /* max-width: 240px; */
 }
 
 .modal-body{
