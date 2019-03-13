@@ -5,6 +5,8 @@ var path = require("path");
 var bodyParser = require("body-parser");
 var session = require("express-session");
 var socket = require("socket.io");
+var expressValidator = require("express-validator");
+var flash = require("express-flash-messages");
 
 // Passport config
 var passport = require("./config/passport");
@@ -27,8 +29,10 @@ app.use(require("express-session")({
   resave: false,
   saveUninitialized: false
 }));
+app.use(expressValidator());
 
 // Passport middleware
+app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 
