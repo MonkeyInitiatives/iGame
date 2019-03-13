@@ -65,6 +65,10 @@ body {
   white-space: normal;
 }
 
+.addToLibrary{
+  margin-top: 10px !important;
+}
+
 .addFriend, .rejectFriend {
   display:inline-block;
   /**other codes**/

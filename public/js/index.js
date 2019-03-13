@@ -106,7 +106,8 @@ $(document).ready(function () {
       $(this).hide();
     }
     else if($(this).attr("data-friendStatus")==="accepted"){
-      $(this).append("<button type='button' class='btn btn-primary text-center rounded my-2 my-sm-0 showFriendLibrary' data-requestID=" + $(this).attr("data-requestID") + ">"+$(this).attr("data-requestName")+"'s Library</button>");
+      console.log($(this));
+      $(this).append("<button type='button' class='btn btn-primary text-center rounded my-2 my-sm-0 showFriendLibrary' data-requestID=" + $(this).attr("data-requestID") + " data-name="+$(this).attr("data-name")+" data-rating="+$(this).attr("data-rating")+" data-hypes="+$(this).attr("data-hypes")+" data-summary="+$(this).attr("data-summary")+" data-poster="+$(this).attr("data-poster")+" data-releasedate="+$(this).attr("data-releasedate")+" data-slug="+$(this).attr("data-slug")+" >"+$(this).attr("data-requestName")+"'s Library</button>");
     }
     else if($(this).attr("data-friendStatus")==="pending"){
       $(this).prepend("Pending: "+$(this).attr("data-requestName"));
@@ -129,9 +130,29 @@ $(document).ready(function () {
     }).then(function (results) {
       console.log(results);
       $("#friendModalInsertion").empty();
+      $('.addToLibrary').each(function() {
+        $(this).attr("onclick", "").unbind("click");
+      });
       for(var i = 0; i<results.length; i++){
-        $("#friendModalInsertion").append(results[i].name+"<br />");
+        // $("#friendModalInsertion").append(results[i].name);
+        // console.log(results[i].slug);
+        $("#friendModalInsertion").append("<button type='button' style='display: inline-block; 'class='btn btn-primary text-center rounded my-2 my-sm-0 addToLibrary btn-sm' data-name='"+results[i].name+"' data-rating='"+results[i].rating+"' data-hypes='"+results[i].hypes+"' data-summary='"+results[i].summary+"' data-poster='"+results[i].poster+"' data-releasedate='"+results[i].releasedate+"' data-slug='"+results[i].slug+"'>Add "+results[i].name+" to your library</button>");
+        $("#friendModalInsertion").append("<br />");
       }
+      $(".addToLibrary").on("click", function (cb) {
+        event.preventDefault();
+        $.post("/api/games/addFromFriendList/", {
+          name: $(this).attr("data-name"),
+          rating: $(this).attr("data-rating"),
+          slug: $(this).attr("data-slug"),
+          poster: $(this).attr("data-poster"),
+          hypes: $(this).attr("data-hypes"),
+          summary: $(this).attr("data-summary"),
+          releasedate: $(this).attr("data-releasedate")
+        }).then(function (results) {
+          window.location.href = "/library";
+        })
+      });
       $("#friendModal").modal("toggle");
     });
   });
@@ -220,10 +241,24 @@ $(document).ready(function () {
       url: "/api/friends/" + $("#friendText").val().trim()
     }).then(function (results) {
       console.log(results);
+      window.location.href = "/library";
     });
 
   });
 
+  $(".deleteGame").on("click", function (cb) {
+    event.preventDefault();
+    console.log($(this).attr("data-slug"));
+    console.log($(this).attr("data-userID"));
+    $.post("/api/games/delete/", {
+      game: $(this).attr("data-slug"),
+      userID: $(this).attr("data-userID")
+    }).then(function (results) {
+      console.log(results);
+      window.location.href = "/library";
+    });
+
+  });
 
   $("#searchButton").on("click", function (cb) {
     event.preventDefault();
@@ -236,7 +271,7 @@ $(document).ready(function () {
       .then(function (results) {
         // console.log("This is the result: " + results.length);
         $("#searchModalInsertion").empty();
-        $("#addLibrary").attr("onclick", "").unbind("click");
+        $(".addLibrary").attr("onclick", "").unbind("click");
         for (let i = 0; i < results.length; i++) {
           $("#searchModalInsertion").append("<h2>" + results[i].name + "</h2>");
           $("#searchModalInsertion").append("<p>" + results[i].summary + "</p>");
