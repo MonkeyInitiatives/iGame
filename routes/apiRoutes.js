@@ -171,6 +171,24 @@ module.exports = function (app) {
         console.log("error", e);
       });
   });
+  
+  app.post("/api/games/addFromFriendList/", function (req, res) {
+    var newGame = {
+      name: req.body.name,
+      rating: req.body.rating,
+      slug: req.body.slug,
+      poster: req.body.poster,
+      hypes: req.body.hypes,
+      summary: req.body.summary,
+      releasedate: req.body.releasedate,
+      UserId: req.user.id
+    }
+    db.Game.create(newGame).then(function (cb) {
+      res.json(cb);
+    });
+    console.log(newGame);
+    
+  });
 
   app.get("/api/friends/", function (req, res) {
     db.Friend.findAll({
@@ -255,8 +273,15 @@ module.exports = function (app) {
   });
 
   // Delete games, not implemented right now.
-  app.delete("/api/games/delete/:id", function (req, res) {
-    db.Game.destroy({}).then(() => {
+  app.post("/api/games/delete/", function (req, res) {
+    console.log(req.body.game);
+    console.log(req.body.userID);
+    db.Game.destroy({
+      where: {
+        userId: req.body.userID,
+        slug: req.body.game
+      }
+    }).then(() => {
       res.redirect("/");
     });
   });
