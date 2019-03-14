@@ -1,51 +1,73 @@
 <div id="home">
+
+  {{#each user}}
+
+  <nav class="navbar fixed-top">
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control rounded" id="searchText" type="search" placeholder="Search for games"
+        aria-label="Search">
+      <button class="btn btn-primary text-center rounded my-2 my-sm-0" id="searchButton" type="submit">Search
+      </button>
+    </form>
+    <form class="form-inline my-2 my-lg-0">
+      <button type="button" class="settings btn btn-primary text-center rounded my-2 my-sm-0 mr-sm-2"><a
+          class="accountButton" data-toggle="modal" data-target="#userModal">Account</a>
+      </button> 
+      </form>
+  </nav>
+
+  <div id="header-image" style="background-image: url(./images/pacman-img.jpg); ">
+    <h1 class="igame-title text-center text-white"><strong>i<span style="color:#7527FF">GAME</span></strong></h1>
+    <h5 class="igame-description text-center text-white">Find your favorite games and tell your friends.</h5>
+  </div>
+
+  {{/each}}
+
+
   <div class="container-fluid">
-    <div class="row">
+
+    <div class="row pt-7">
+
       <div class="col-lg-8">
-        {{#each user}}
-        <style>
-          body {
-            background-image:url({{backgroundimage}});
-            background-repeat: no-repeat;
-            background-size: 100vw 100vh;
-            background-attachment: fixed;
-          }
-        </style>
-        <nav class="navbar navbar-light bg-light justify-content-between accentColor rounded"
-          style="background-image: url(./images/mario.gif), url(./images/pokemon.gif); background-attachment: fixed; background-size: 33vw 36.5vh;">
-          {{/each}}
-          <img src="./images/logo.png" class="logo">
-          </button>
-          <input class="form-control rounded" id="searchText" type="search" placeholder="Search for games" aria-label="Search">
-          <button class="btn btn-primary text-center rounded my-2 my-sm-0" id="searchButton" type="submit">Search
-          </button>
-           <button type="button" class="settings btn btn-primary text-center rounded my-2 my-sm-0"><a
-              class="navbar-brand accountButton" data-toggle="modal" data-target="#userModal">Account</a>
-          </button>
-        </nav>
+        <input id="basics">
 
         {{!-- <h1>Game Library</h1> --}}
         <br>
+
         <div class="wrapper rounded justify-content-between accentColor bg-transparent" id="gamelist-wrapper"
           style="background-color:{{accentcolor}} !important;">
-          <input id="basics"/>
-          <br>
+
+          <button id="right-button">
+            <i id="arrow" class="fas fa-angle-double-right"></i>
+          </button>
           {{#each games}}
           {{> games/gamelist-block}}
           {{/each}}
+          <button id="left-button">
+            <i id="arrow" class="fas fa-angle-double-left"></i>
+          </button>
         </div>
         <br>
       </div>
+
+
+
       <div class="col-lg-4">
         <div class="wrapper rounded accentColor" style="background-color:{{accentcolor}} !important;"
           id="friendlist-wrapper">
-          <input class="form-control mr-sm-2" id="friendText" type="search" placeholder="Search by email"
+          {{!-- <input class="form-control mr-sm-2" id="friendText" type="search" placeholder="Search by email"
             aria-label="Search">
           <button class="btn btn-primary text-center rounded my-2 my-sm-0" id="friendButton" type="submit">Request
-            Friendship</button>
-            <br>
-            <br>
-          <h4>Friends</h4>
+            Friendship</button> --}}
+          <form class="form-inline my-2 my-lg-0">
+            <input class="form-control rounded" id="friendText" type="search" placeholder="Search by email"
+              aria-label="Search">
+            <button class="btn btn-primary text-center rounded my-2 my-sm-0" id="friendButton" type="submit">Connect
+              with Friend
+            </button>
+          </form>
+          <br>
+          <h4>Friends:</h4>
           {{#each friends}}
           {{> friends/friends-block}}
           {{/each}}
@@ -57,7 +79,6 @@
         </div>
       </div>
     </div>
-
   </div>
   {{> modals/usermodal-block}}
 
