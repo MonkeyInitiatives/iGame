@@ -105,6 +105,13 @@ $(document).ready(function () {
     $(this).attr('style', 'background-color:' + accentcolor + ' !important');
   })
 
+  var backgroundimage = "./images/default-background.png";
+	if ($("#inputBackground").val() === "") {
+      backgroundimage = $("#inputBackground").attr("placeholder");
+    } else {
+      backgroundimage = $("#inputBackground").val();
+    }
+    
     // Transition effect for navbar 
     $(window).scroll(function () {
         // if window is scrolled more than 25px, add/remove solid class
