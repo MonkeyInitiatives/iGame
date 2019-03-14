@@ -100,41 +100,33 @@ $exampleList.on("click", ".delete", handleDeleteBtnClick);
 
 //when the search button is clicked, it calls the post route that then calls the igdb api.
 $(document).ready(function () {
-   
 
-    // Transition effect for navbar 
-    $(window).scroll(function () {
-        // if window is scrolled more than 25px, add/remove solid class
-        if ($(this).scrollTop() > 250) {
-            $('.navbar').addClass('solid');
-        } else {
-            $('.navbar').removeClass('solid', 'links');
-        }
-    });
 
-    // Change iGame title on hover
-    $(".igame-title").hover(function(){
-      $(this).css("color", "pink");
-    });
-
-  $('.friend-list').each(function() {
-    if($(this).attr("data-friendStatus")==="rejected"){
-      $(this).hide();
-    }
-    else if($(this).attr("data-friendStatus")==="accepted"){
-      console.log($(this));
-      $(this).append("<button type='button' class='btn btn-primary text-center rounded my-2 my-sm-0 showFriendLibrary' data-requestID=" + $(this).attr("data-requestID") + " data-name="+$(this).attr("data-name")+" data-rating="+$(this).attr("data-rating")+" data-hypes="+$(this).attr("data-hypes")+" data-summary="+$(this).attr("data-summary")+" data-poster="+$(this).attr("data-poster")+" data-releasedate="+$(this).attr("data-releasedate")+" data-slug="+$(this).attr("data-slug")+" >"+$(this).attr("data-requestName")+"'s Library</button>");
-    }
-    else if($(this).attr("data-friendStatus")==="pending"){
-      $(this).prepend("Pending: "+$(this).attr("data-requestName"));
+  // Transition effect for navbar 
+  $(window).scroll(function () {
+    // if window is scrolled more than 25px, add/remove solid class
+    if ($(this).scrollTop() > 250) {
+      $('.navbar').addClass('solid');
+    } else {
+      $('.navbar').removeClass('solid');
     }
   });
-  $('.friend-requests').each(function() {
-    if($(this).attr("data-friendStatus")==="pending" && ($(this).attr("data-requestID")!==$(this).attr("data-userID"))){
+
+  $('.friend-list').each(function () {
+    if ($(this).attr("data-friendStatus") === "rejected") {
+      $(this).hide();
+    } else if ($(this).attr("data-friendStatus") === "accepted") {
+      console.log($(this));
+      $(this).append("<button type='button' class='btn btn-primary text-center rounded my-2 my-sm-0 showFriendLibrary' data-requestID=" + $(this).attr("data-requestID") + " data-name=" + $(this).attr("data-name") + " data-rating=" + $(this).attr("data-rating") + " data-hypes=" + $(this).attr("data-hypes") + " data-summary=" + $(this).attr("data-summary") + " data-poster=" + $(this).attr("data-poster") + " data-releasedate=" + $(this).attr("data-releasedate") + " data-slug=" + $(this).attr("data-slug") + " >" + $(this).attr("data-requestName") + "'s Library</button>");
+    } else if ($(this).attr("data-friendStatus") === "pending") {
+      $(this).prepend("<br><p><strong>Pending Friends:</strong><br><ul>" + $(this).attr("data-requestName") + "</ul>");
+    }
+  });
+  $('.friend-requests').each(function () {
+    if ($(this).attr("data-friendStatus") === "pending" && ($(this).attr("data-requestID") !== $(this).attr("data-userID"))) {
       $(this).append("<button type='button' class='btn btn-primary text-center rounded my-2 my-sm-0 rejectFriend' data-userID=" + $(this).attr("data-userID") + " data-requestID=" + $(this).attr("data-requestID") + " data-requestName=" + $(this).attr("data-requestName") + ">Reject</button>");
       $(this).append("<button type='button' class='btn btn-primary text-center rounded my-2 my-sm-0 addFriend' data-userID=" + $(this).attr("data-userID") + " data-requestID=" + $(this).attr("data-requestID") + " data-requestName=" + $(this).attr("data-requestName") + ">Accept</button>");
-    }
-    else if($(this).attr("data-requestID")!==$(this).attr("data-userID")){
+    } else if ($(this).attr("data-requestID") !== $(this).attr("data-userID")) {
       $(this).remove();
     }
   });
@@ -146,13 +138,13 @@ $(document).ready(function () {
     }).then(function (results) {
       console.log(results);
       $("#friendModalInsertion").empty();
-      $('.addToLibrary').each(function() {
+      $('.addToLibrary').each(function () {
         $(this).attr("onclick", "").unbind("click");
       });
-      for(var i = 0; i<results.length; i++){
+      for (var i = 0; i < results.length; i++) {
         // $("#friendModalInsertion").append(results[i].name);
         // console.log(results[i].slug);
-        $("#friendModalInsertion").append("<button type='button' style='display: inline-block; 'class='btn btn-primary text-center rounded my-2 my-sm-0 addToLibrary btn-sm' data-name='"+results[i].name+"' data-rating='"+results[i].rating+"' data-hypes='"+results[i].hypes+"' data-summary='"+results[i].summary+"' data-poster='"+results[i].poster+"' data-releasedate='"+results[i].releasedate+"' data-slug='"+results[i].slug+"'>Add "+results[i].name+" to your library</button>");
+        $("#friendModalInsertion").append("<button type='button' style='display: inline-block; 'class='btn btn-primary text-center rounded my-2 my-sm-0 addToLibrary btn-sm' data-name='" + results[i].name + "' data-rating='" + results[i].rating + "' data-hypes='" + results[i].hypes + "' data-summary='" + results[i].summary + "' data-poster='" + results[i].poster + "' data-releasedate='" + results[i].releasedate + "' data-slug='" + results[i].slug + "'>Add " + results[i].name + " to your library</button>");
         $("#friendModalInsertion").append("<br />");
       }
       $(".addToLibrary").on("click", function (cb) {
@@ -174,8 +166,8 @@ $(document).ready(function () {
   });
 
   $(".addFriend").on("click", function (cb) {
-    console.log("My ID: "+$(this).attr("data-userID"));
-    console.log("Friend ID: "+$(this).attr("data-requestID"));
+    console.log("My ID: " + $(this).attr("data-userID"));
+    console.log("Friend ID: " + $(this).attr("data-requestID"));
     console.log("add friend");
     $.post("/api/friends/add/", {
       userID: $(this).attr("data-userID"),
@@ -196,13 +188,15 @@ $(document).ready(function () {
 
   var options = {
     data: [],
-    getValue: function(element) {
+    getValue: function (element) {
       return element.name;
     },
     placeholder: "Search your library",
   };
-  $('.game-object').each(function() {
-    var theobject = {"name": $(this).text()};
+  $('.game-object').each(function () {
+    var theobject = {
+      "name": $(this).text()
+    };
     options.data.push(theobject);
   });
   console.log(options.data);
@@ -210,15 +204,15 @@ $(document).ready(function () {
     match: {
       enabled: true
     },
-		onChooseEvent: function() {
+    onChooseEvent: function () {
       console.log($("#basics").val());
-      $('.modal').each(function() {
-        
-        if($(this).text().includes($("#basics").val())){
+      $('.modal').each(function () {
+
+        if ($(this).text().includes($("#basics").val())) {
           $(this).modal("toggle");
         }
       });
-    }	
+    }
   };
   $("#basics").easyAutocomplete(options);
 
@@ -227,16 +221,14 @@ $(document).ready(function () {
     var avatar = "./images/default-avatar.png";
     var backgroundimage = "./images/default-background.png";
     var accentcolor = $("#inputColor").val().trim()
-    if($("#inputAvatar").val().trim()===""){
+    if ($("#inputAvatar").val().trim() === "") {
       avatar = $("#inputAvatar").attr("placeholder");
-    }
-    else{
+    } else {
       avatar = $("#inputAvatar").val().trim();
     }
-    if($("#inputBackground").val().trim()===""){
+    if ($("#inputBackground").val().trim() === "") {
       backgroundimage = $("#inputBackground").attr("placeholder");
-    }
-    else{
+    } else {
       backgroundimage = $("#inputBackground").val().trim();
     }
     $.post("/api/update_user", {
@@ -244,9 +236,9 @@ $(document).ready(function () {
       backgroundimage: backgroundimage,
       accentcolor: $("#inputColor").val().trim()
     }).then(function (results) {
-      $("body").css("background-image", "url('"+backgroundimage+"')");
-      $('.accentColor').attr('style', 'background-color:' +accentcolor+' !important');
-      $('#userAvatar').attr('src',avatar);      
+      $("body").css("background-image", "url('" + backgroundimage + "')");
+      $('.accentColor').attr('style', 'background-color:' + accentcolor + ' !important');
+      $('#userAvatar').attr('src', avatar);
     })
   });
 
@@ -262,14 +254,14 @@ $(document).ready(function () {
   });
 
   // Gamelist buttons scroll on click
-  $("#right-button").click(function() {
+  $("#right-button").click(function () {
     event.preventDefault();
     $("#gamelist-wrapper").animate({
       scrollLeft: "+=400px"
     }, "slow");
   });
-  
-   $("#left-button").click(function() {
+
+  $("#left-button").click(function () {
     event.preventDefault();
     $("#gamelist-wrapper").animate({
       scrollLeft: "-=400px"

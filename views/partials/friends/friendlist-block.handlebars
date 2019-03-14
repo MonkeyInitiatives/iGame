@@ -1,7 +1,5 @@
-<h2 class="friend-chat-title text-center"><i class="fas fa-comments text-center" style="color: #7527FF"></i> Chat</h2>
-
-
 <div id="chatbox">
+    <div class="chat-title-bg"><h2 class="friend-chat-title text-center">Live Chat</h2></div>
     {{#each user}}
     <div id="chat-window">
         <div id="chat-feedback"></div>
@@ -13,7 +11,8 @@
 
     {{!-- </div> --}}
     <input id="chat-message" type="text" placeholder="Message">
-    <button id="chat-send-btn" style="background-color: #7527FF">Send</button>
+    <button id="chat-send-btn" style="background-color: #7527FF"><i class="fa fa-paper-plane" aria-hidden="true"> Send</i>
+</button>
     {{/each}}
 </div>
 {{!-- 

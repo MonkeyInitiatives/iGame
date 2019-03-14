@@ -18,7 +18,6 @@ $(document).ready(function () {
             chatMessage: chatMessage.val()
         });
         chatMessage.val("");
-
     });
 
     // Check if user is typing
