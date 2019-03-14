@@ -100,6 +100,22 @@ $exampleList.on("click", ".delete", handleDeleteBtnClick);
 
 //when the search button is clicked, it calls the post route that then calls the igdb api.
 $(document).ready(function () {
+   
+
+    // Transition effect for navbar 
+    $(window).scroll(function () {
+        // if window is scrolled more than 25px, add/remove solid class
+        if ($(this).scrollTop() > 250) {
+            $('.navbar').addClass('solid');
+        } else {
+            $('.navbar').removeClass('solid', 'links');
+        }
+    });
+
+    // Change iGame title on hover
+    $(".igame-title").hover(function(){
+      $(this).css("color", "pink");
+    });
 
 
   // Transition effect for navbar 
@@ -262,6 +278,7 @@ $(document).ready(function () {
   });
 
   $("#left-button").click(function () {
+
     event.preventDefault();
     $("#gamelist-wrapper").animate({
       scrollLeft: "-=400px"

@@ -21,6 +21,7 @@ body {
   max-width: 256px;
 }
 
+
 /* Search Your Library button */
 #basics {
   position: absolute;
@@ -52,6 +53,7 @@ body {
   position: sticky;
   top: 50%;
   left: 0;
+
   overflow: visible;
   border: none; 
   background-color: transparent;
@@ -64,6 +66,7 @@ body {
   position: sticky;
   top: 50%;
   right: 0;
+
   overflow: visible;
   border: none; 
   background-color: transparent;
@@ -79,11 +82,13 @@ body {
    box-shadow: 0px 0px 2px #888;
    padding: 0.1em 0.2em;
    opacity: 0.6;
+   opacity: 0.8;
  }
 
  #arrow:hover {
    color: #7527FF;
    opacity: 0.8;
+
  }
  
 #gamelist-wrapper{
@@ -93,6 +98,7 @@ body {
   /* overflow-y: scroll; */
   padding: 2%;
   padding-top:10%;
+
   /* margin-top: 10%; */
   width: 100%;
   margin: 0 auto;
@@ -135,6 +141,7 @@ body {
 
 .addFriend, .rejectFriend {
   display:inline-block;
+
 }
 
 .friend-requests{
@@ -182,6 +189,7 @@ body {
 
 #friendText {
   margin-right: 5px;
+
 }
 
 /* Style the video: 100% width and height to cover the entire window */
@@ -205,6 +213,7 @@ body {
 
 #chat-window{
   height: 220px;
+
   overflow: auto;
   background: #f9f9f9;
 }
@@ -269,13 +278,14 @@ opacity: 0.9;
 .friend-chat-title {
   color: #000000;
   font-size: 25px;
+
 }
 
-/* Flash Errors */
-.errors {
-  padding: 10px;
-  border: solid 1px #ff0000;
-  background-color: #ff000033;
+#searchButton {
+  margin: 5px;
+  font-size: 20px;
+  border: none;
+  background-color: #7527FF;
 }
 
 .errors li {
@@ -347,6 +357,7 @@ opacity: 0.9;
   background-color: #7527FF;
 }
 
+
 #searchButton:hover {
   color: #FFF527;
   border: none;
@@ -362,4 +373,5 @@ opacity: 0.9;
   margin-right: auto;
   width: 50%;
   border-radius: 50%;
+
 }

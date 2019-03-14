@@ -14,6 +14,7 @@
           class="accountButton" data-toggle="modal" data-target="#userModal">Account</a>
       </button>
     </form>
+
   </nav>
 
   <div id="header-image" style="background-image: url(./images/pacman-img.jpg); ">
@@ -33,17 +34,20 @@
 
         {{!-- <h1>Game Library</h1> --}}
         <br>
+
         <div class="wrapper rounded justify-content-between accentColor bg-transparent" id="gamelist-wrapper"
           style="background-color:{{accentcolor}} !important;">
 
           <button id="left-button">
             <i id="arrow" class="fas fa-angle-double-left"></i>
+
           </button>
           {{#each games}}
           {{> games/gamelist-block}}
           {{/each}}
           <button id="right-button">
             <i id="arrow" class="fas fa-angle-double-right"></i>
+
           </button>
         </div>
         <br>
@@ -76,6 +80,7 @@
               {{/each}}
             </div>
           </div>
+
           {{!-- <h4>Requests</h4> --}}
           {{#each friendrequests}}
           {{> friends/friendrequests-block}}
