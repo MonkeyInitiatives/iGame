@@ -58,6 +58,7 @@ body {
   border: none; 
   background-color: transparent;
   outline: none;
+  z-index: 1000;
  }
 
  #right-button{
@@ -88,7 +89,6 @@ body {
  #arrow:hover {
    color: #7527FF;
    opacity: 0.8;
-
  }
  
 #gamelist-wrapper{
@@ -187,6 +187,10 @@ body {
   display: inline-block;
 }
 
+#dropdownMenu {
+  border-radius: 5px;
+}
+
 #friendText {
   margin-right: 5px;
 
@@ -209,6 +213,7 @@ body {
   margin: 10px auto;
   border: 1px solid #ddd;
   box-shadow: 1px 3px 5px rgba(0,0,0,0.05);
+  border-radius: 15px;
 }
 
 #chat-window{
@@ -255,7 +260,8 @@ body {
   border: 0;
   padding: 12px 0;
   width: 100%;
-  border-radius: 0 0 2px 2px;
+  border-bottom-right-radius: 15px;
+  border-bottom-left-radius: 15px;
 }
 
 .intro-box {
@@ -272,7 +278,9 @@ opacity: 0.9;
 
 .chat-title-bg {
   background-color: #FFF527;
-  padding-bottom: 5px;
+  padding: 5px;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
 }
 
 .friend-chat-title {
@@ -355,6 +363,11 @@ opacity: 0.9;
   font-size: 20px;
   border: none;
   background-color: #7527FF;
+  padding-bottom: 0;
+}
+
+#friendText {
+  width: 175px;
 }
 
 
