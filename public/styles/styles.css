@@ -1,3 +1,19 @@
+
+body {
+   background-size: cover;
+   margin: 0 auto;
+ }
+
+ #header-image{
+	height: 450px;
+	width: 100%;
+	background-size: cover;
+	background-attachment: fixed;
+	padding: 0;
+	margin: 0px;
+	display: table;
+}
+
 .list-group-item {
   line-height: 2.5;
 }
@@ -5,26 +21,20 @@
   max-width: 256px;
 }
 
-body {
-   background-size: cover;
-   margin: 0 auto;
- }
-
-.mario{
-   background-image: url("./images/mario.gif");
-   background-attachment: fixed;
-   background-size: 100%;
-   background-size: 100vw
- }
-
+/* Search Your Library button */
 #basics {
-  position: fixed;
+  position: absolute;
+  top: 30px;
+  left: 20px;
+  border: 2px solid #7527FF;
 }
 
 .row{
   /* max-height: 50%; */
-  padding: 20px;
+  /* padding: 20px; */
+  padding-top: 20px;
 }
+
 #friendlist-wrapper{
   background-color: white;
   min-height: 500px;
@@ -34,25 +44,78 @@ body {
   margin-right: 0;
 }
 
+/* Gamelist */
+#left-button{
+  float: right; 
+  position: -webkit-sticky; /* Safari */
+  position: sticky;
+  top: 50%;
+  right: 0;
+  overflow: visible;
+  border: none; 
+  background-color: transparent;
+  outline: none;
+ }
+
+ #right-button{
+  float: left; 
+  position: -webkit-sticky; /* Safari */
+  position: sticky;
+  top: 50%;
+  left: 0;
+  overflow: visible;
+  border: none; 
+  background-color: transparent;
+  outline: none;
+ }
+
+#arrow {
+   color: #FFF527;
+   font-size: 60px;
+   border: none;
+   border-radius: 50%;
+   background-color: black;
+   box-shadow: 0px 0px 2px #888;
+   padding: 0.1em 0.2em;
+   opacity: 0.8;
+ }
+
+ #arrow:hover {
+   color: #7527FF;
+ }
+ 
 #gamelist-wrapper{
   background-color: white;
   /* min-height: 500px;
   max-height: 75%; */
   /* overflow-y: scroll; */
   padding: 2%;
-  /* margin-bottom: 10%; */
-
+  padding-top:8%;
+  /* margin-top: 10%; */
   width: 100%;
+  margin: 0 auto;
+  display: flex;
   overflow-x: auto;
+  overflow-x: hidden;
   white-space: nowrap;
 }
+
 .game-box{
   display:inline-block;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 20px;
+  margin-left: 0 auto;
+  margin-right: 0 auto;
+  margin: 15px;
   max-height: 320px;
+  box-shadow: 10px 10px 5px grey;
+  transition: all .2s ease-in-out;
 }
+
+.game-box:hover{
+  transform: scale(1.1); 
+  opacity: 0.7;
+  cursor: pointer;
+}
+
 .game-box-modal{
   display:block;
   margin-left: auto;
@@ -72,10 +135,30 @@ body {
 .addFriend, .rejectFriend {
   display:inline-block;
   /**other codes**/
-  }
+}
+
 .friend-requests{
   display: inline-block;
 }
+
+.showFriendLibrary {
+  background-color: #7527FF;
+  border: none;
+}
+
+.showFriendLibrary:hover {
+  background-color: #7527FF;
+}
+
+#friendButton {
+  background-color: #7527FF; 
+  border:none;
+}
+
+#friendButton:hover {
+  background-color: #7527FF;
+}
+
 /* Style the video: 100% width and height to cover the entire window */
 #myVideo {
   position: fixed;
@@ -97,7 +180,7 @@ body {
 }
 
 #chat-window{
-  height: 250px;
+  height: 140px;
   overflow: auto;
   background: #f9f9f9;
 }
@@ -133,7 +216,7 @@ body {
 }
 
 #chat-send-btn {
-  background: #571c79;
+  background: #7527FF;
   color: #fff;
   font-size: 18px;
   border: 0;
@@ -146,25 +229,6 @@ body {
 opacity: 0.9;
 }
 
-#search-text {
-  width: 100%;
-}
-
-.settings {
-margin-top: 1%;
-padding-right: 0%;
-}
-
-#searchButton {
-  margin-top: 1%;
-}
-
-.logo {
-  width: 10%;
-  margin-left: 45%;
-  margin-bottom: 1%;
-}
-
 /* Flash Errors */
 .errors {
   padding: 10px;
@@ -175,4 +239,60 @@ padding-right: 0%;
 .errors li {
   color: #ff0000;
   list-style-type: none;
+}
+
+/* Title inside header image */
+.igame-title {
+  padding-top: 75px;
+  font-size: 80px;
+  font-family: 'Oswald', sans-serif;
+}
+
+.igame-description {
+  font-family: 'Lato', sans-serif;
+}
+
+/* Navbar */
+.navbar{
+  width: 100%;
+  height: 80px;
+  transition: background-color 1s ease 0s;
+  background-color: #000000;
+}
+
+.navbar.solid {
+  background-color: #3f3e3e;
+  opacity: 0.9;
+  transition: background-color 1s ease 0s;
+}
+
+.settings {
+  font-size: 20px;
+  outline: none;
+  text-decoration: none;
+  border: none;
+  color: #7527FF;
+  background-color: transparent;
+}
+
+.settings:hover {
+  color: #FFF527;
+  outline: none;
+  border: none;
+  outline:none;
+  background-color: transparent;
+}
+
+#searchButton {
+  margin: 5px;
+  font-size: 20px;
+  border: none;
+  background-color: #7527FF;
+}
+
+#searchButton:hover {
+  color: #FFF527;
+  border: none;
+  outline: none;
+  background-color: transparent;
 }

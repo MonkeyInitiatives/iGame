@@ -100,6 +100,22 @@ $exampleList.on("click", ".delete", handleDeleteBtnClick);
 
 //when the search button is clicked, it calls the post route that then calls the igdb api.
 $(document).ready(function () {
+   
+
+    // Transition effect for navbar 
+    $(window).scroll(function () {
+        // if window is scrolled more than 25px, add/remove solid class
+        if ($(this).scrollTop() > 250) {
+            $('.navbar').addClass('solid');
+        } else {
+            $('.navbar').removeClass('solid', 'links');
+        }
+    });
+
+    // Change iGame title on hover
+    $(".igame-title").hover(function(){
+      $(this).css("color", "pink");
+    });
 
   $('.friend-list').each(function() {
     if($(this).attr("data-friendStatus")==="rejected"){
@@ -208,7 +224,7 @@ $(document).ready(function () {
 
 
   $(".save-user-data").on("click", function (cb) {
-    var avatar = "./images/default-avatar.png";;
+    var avatar = "./images/default-avatar.png";
     var backgroundimage = "./images/default-background.png";
     var accentcolor = $("#inputColor").val().trim()
     if($("#inputAvatar").val().trim()===""){
@@ -243,7 +259,21 @@ $(document).ready(function () {
       console.log(results);
       window.location.href = "/library";
     });
+  });
 
+  // Gamelist buttons scroll on click
+  $("#right-button").click(function() {
+    event.preventDefault();
+    $("#gamelist-wrapper").animate({
+      scrollLeft: "+=400px"
+    }, "slow");
+  });
+  
+   $("#left-button").click(function() {
+    event.preventDefault();
+    $("#gamelist-wrapper").animate({
+      scrollLeft: "-=400px"
+    }, "slow");
   });
 
   $(".deleteGame").on("click", function (cb) {
@@ -257,7 +287,6 @@ $(document).ready(function () {
       console.log(results);
       window.location.href = "/library";
     });
-
   });
 
   $("#searchButton").on("click", function (cb) {
