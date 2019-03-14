@@ -104,13 +104,6 @@ $(document).ready(function () {
     var accentcolor = $("#inputColor").val().trim()
     $(this).attr('style', 'background-color:' + accentcolor + ' !important');
   })
-  var backgroundimage = "./images/default-background.png";
-	if ($("#inputBackground").val().trim() === "") {
-      backgroundimage = $("#inputBackground").attr("placeholder");
-    } else {
-      backgroundimage = $("#inputBackground").val().trim();
-    }
-	$("body").css("background-image", "url('" + backgroundimage + "')");
 
     // Transition effect for navbar 
     $(window).scroll(function () {
