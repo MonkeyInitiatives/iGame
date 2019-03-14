@@ -5,6 +5,7 @@
           
             <div class="modal-header">
                 <h4 class="modal-title">Welcome {{name}}!</h4>
+                <button onclick="location.href='/logout'" class="btn btn-primary col-sm-2">Logout</button>
             </div>
             <div class="modal-body">
                 <img src="{{avatar}}" alt="UserAvatar" id="userAvatar" class="game-box">  
@@ -32,7 +33,6 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button onclick="location.href='/logout'" class="btn btn-primary col-sm-2">Logout</button>
                 <button type="button" class="btn btn-primary col-sm-2 save-user-data" data-dismiss="modal">Save</button>
             </div>
           {{/each}}
