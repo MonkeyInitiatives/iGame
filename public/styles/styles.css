@@ -14,6 +14,11 @@ body {
 	display: table;
 }
 
+#searchText {
+  border: 2px solid #7527FF;
+  box-shadow: 1px 3px 5px rgba(0,0,0,0.05);
+}
+
 .list-group-item {
   line-height: 2.5;
 }
@@ -44,6 +49,7 @@ body {
   overflow-y: hidden; */
   padding: 4%;
   margin-right: 0;
+  margin-bottom: 5%;
 }
 
 /* Gamelist */
@@ -189,11 +195,16 @@ body {
 
 #dropdownMenu {
   border-radius: 5px;
+  border: 2px solid #7527FF;
+  box-shadow: 1px 3px 5px rgba(0,0,0,0.05);
 }
 
 #friendText {
-  margin-right: 5px;
-
+  margin-right: 20px;
+  border: 2px solid #7527FF;
+  box-shadow: 1px 3px 5px rgba(0,0,0,0.05);
+  border-radius: 17.5px;
+  width: 177px;
 }
 
 /* Style the video: 100% width and height to cover the entire window */
@@ -211,9 +222,9 @@ body {
 #chatbox{
   max-width: 100%;
   margin: 10px auto;
-  border: 1px solid #ddd;
+  border: 2px solid #7527FF;
   box-shadow: 1px 3px 5px rgba(0,0,0,0.05);
-  border-radius: 15px;
+  border-radius: 17.5px;
 }
 
 #chat-window{
@@ -366,11 +377,6 @@ opacity: 0.9;
   padding-bottom: 0;
 }
 
-#friendText {
-  width: 175px;
-}
-
-
 #searchButton:hover {
   color: #FFF527;
   border: none;
@@ -387,4 +393,9 @@ opacity: 0.9;
   width: 50%;
   border-radius: 50%;
 
+}
+
+footer {
+  border-top: 5px solid #7527FF;;
+  padding: 1%;
 }
