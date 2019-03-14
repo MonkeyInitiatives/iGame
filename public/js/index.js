@@ -100,7 +100,10 @@ $exampleList.on("click", ".delete", handleDeleteBtnClick);
 
 //when the search button is clicked, it calls the post route that then calls the igdb api.
 $(document).ready(function () {
-   
+  $('.accentColor').each(function () {
+    var accentcolor = $("#inputColor").val().trim()
+    $(this).attr('style', 'background-color:' + accentcolor + ' !important');
+  })
 
     // Transition effect for navbar 
     $(window).scroll(function () {
