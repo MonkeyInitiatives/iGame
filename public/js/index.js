@@ -111,7 +111,8 @@ $(document).ready(function () {
     } else {
       backgroundimage = $("#inputBackground").val();
     }
-    
+    $("body").css("background-image", "url('" + backgroundimage + "')");  
+
     // Transition effect for navbar 
     $(window).scroll(function () {
         // if window is scrolled more than 25px, add/remove solid class
