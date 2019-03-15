@@ -146,7 +146,7 @@ $(document).ready(function () {
       console.log($(this));
       $(this).append("<button type='button' class='btn btn-primary text-center rounded my-2 my-sm-0 showFriendLibrary' data-requestID=" + $(this).attr("data-requestID") + " data-name=" + $(this).attr("data-name") + " data-rating=" + $(this).attr("data-rating") + " data-hypes=" + $(this).attr("data-hypes") + " data-summary=" + $(this).attr("data-summary") + " data-poster=" + $(this).attr("data-poster") + " data-releasedate=" + $(this).attr("data-releasedate") + " data-slug=" + $(this).attr("data-slug") + " >" + $(this).attr("data-requestName") + "'s Library</button>");
     } else if ($(this).attr("data-friendStatus") === "pending") {
-      $(this).prepend("<br><p><strong>Pending Friends:</strong><br><ul>" + $(this).attr("data-requestName") + "</ul>");
+      $(this).prepend("<strong>Pending:</strong> " + $(this).attr("data-requestName"));
     }
   });
   $('.friend-requests').each(function () {
@@ -324,7 +324,7 @@ $(document).ready(function () {
         for (let i = 0; i < results.length; i++) {
           $("#searchModalInsertion").append("<h2>" + results[i].name + "</h2>");
           $("#searchModalInsertion").append("<p>" + results[i].summary + "</p>");
-          $("#searchModalInsertion").append("<button type='button' class='btn btn-outline-success my-2 my-sm-0 addLibrary' data-gameID=" + results[i].id + ">Add to Library</button>");
+          $("#searchModalInsertion").append("<button type='button' class='btn my-2 my-sm-0 addLibrary' data-gameID=" + results[i].id + ">Add to Library</button><br><br><hr>");
         }
         // jQuery.noConflict();
         $("#searchModal").modal("toggle")

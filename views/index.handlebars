@@ -6,11 +6,12 @@
     <form class="form-inline my-2 my-lg-0">
       <input class="form-control rounded" id="searchText" type="search" placeholder="Search for games"
         aria-label="Search">
-      <button class="btn btn-primary text-center rounded my-2 my-sm-0" id="searchButton" type="submit"><i class="fa fa-search" aria-hidden="true"></i>
+      <button class="btn btn-primary text-center rounded my-2 my-sm-0" id="searchButton" type="submit"><i
+          class="fa fa-search" aria-hidden="true"></i>
       </button>
     </form>
     <form class="form-inline my-2 my-lg-0">
-      <button type="button" class="settings btn btn-primary text-center rounded my-2 my-sm-0 mr-sm-2"><a
+      <button type="button" class="settings btn text-center rounded my-2 my-sm-0 mr-sm-2"><a
           class="accountButton" data-toggle="modal" data-target="#userModal">Account</a>
       </button>
     </form>
@@ -29,7 +30,7 @@
 
     <div class="row pt-7">
 
-      <div class="col-lg-8">
+      <div class="col-lg-6">
         <input id="basics">
 
         {{!-- <h1>Game Library</h1> --}}
@@ -53,33 +54,27 @@
         <br>
       </div>
 
-      <div class="col-lg-4">
+      <div class="col-lg-6">
         <div class="wrapper rounded accentColor" style="background-color:{{accentcolor}} !important;"
           id="friendlist-wrapper">
-          {{!-- <input class="form-control mr-sm-2" id="friendText" type="search" placeholder="Search by email"
-            aria-label="Search">
-          <button class="btn btn-primary text-center rounded my-2 my-sm-0" id="friendButton" type="submit">Request
-            Friendship</button> --}}
           <form class="form-inline my-2 my-lg-0">
             <input class="form-control rounded" id="friendText" type="search" placeholder="Search friend by email"
               aria-label="Search">
-            <button class="btn btn-primary text-center rounded my-2 my-sm-0" id="friendButton" type="submit"><i
-                class="fas fa-plus-circle"> Add Friend</i>
+            <button class="btn btn-primary text-center rounded my-2 my-sm-0" id="friendButton" type="submit"
+              title="Add Friend"><i class="fas fa-plus-circle"></i>
             </button>
-          </form>
-          <br>
-
-          <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu" data-toggle="dropdown"
-              aria-haspopup="true" aria-expanded="false">
-              Friends
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenu">
-              {{#each friends}}
-              {{> friends/friends-block}}
-              {{/each}}
+            <div class="dropdown">
+              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false" style="background-color:white">
+                Friends
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenu">
+                {{#each friends}}
+                {{> friends/friends-block}}
+                {{/each}}
+              </div>
             </div>
-          </div>
+          </form>
 
           {{!-- <h4>Requests</h4> --}}
           {{#each friendrequests}}
@@ -96,7 +91,7 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h1 class="modal-title">Search Results</h1>
+          <h1 class="modal-title text-center">Search Results</h1>
         </div>
         <div class="modal-body" id="searchModalInsertion">
 
@@ -127,7 +122,7 @@
   </div>
 </div>
 <footer class="footer">
-        <h6 class="text-center">Copyright © 2019</h6>
-    </footer>
+  <h6 class="text-center">Copyright © 2019</h6>
+</footer>
 {{!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="/js/index.js"></script> --}}
