@@ -23,14 +23,13 @@ $(document).ready(function () {
     // Check if user is typing
     chatMessage.keypress(function () {
         socket.emit("typing", chatName.val())
-
     });
 
     // Listen for events 
     socket.on("chat", function (data) {
         // console.log(data)
         // output data to DOM
-        chatFeedback.val("");
+        chatFeedback.text("");
         chatOutput.append($('<p>').text(data.chatName + ": " + data.chatMessage));
     });
 

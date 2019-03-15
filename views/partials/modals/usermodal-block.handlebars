@@ -5,7 +5,7 @@
           
             <div class="modal-header">
                 <h4 class="modal-title">Welcome {{name}}!</h4>
-                <button onclick="location.href='/logout'" class="btn btn-primary col-sm-2">Logout</button>
+                <button onclick="location.href='/logout'" class="btn btn-primary col-sm-2" id="logoutButton">Logout</button>
             </div>
             <div class="modal-body">
                 <img src="{{avatar}}" alt="UserAvatar" id="userAvatar" class="game-box">  
@@ -29,11 +29,12 @@
                     <option>blue</option>
                     <option>indigo</option>
                     <option>violet</option>
+                    <option>white (reset)</option>
                   </select>
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary col-sm-2 save-user-data" data-dismiss="modal">Save</button>
+                <button type="button" class="btn btn-primary col-sm-2 save-user-data" data-dismiss="modal" id="saveButton">Save</button>
             </div>
           {{/each}}
         </div> 
