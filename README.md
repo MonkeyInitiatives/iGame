@@ -6,9 +6,15 @@ iGame is a full-stack application that lets gamers create a personal account and
 
 Create your account, add games, and personalize your page with your own avatar and background colors
 
+![add-games](public/images/add-games-low.gif)
+
 Add your friends by email. They will be listed under the "Friends" dropdown menu as "Pending" until they accept or deny your friend request.
 
+![add-friend](public/images/add-friend-low.gif)
+
 Accepting friend requests means you also have access to their games and can add them to your library. Enjoy chatting with them about your progress in the Live Chat!
+
+![chat](public/images/accept-friend-low.gif)
 
 ## Demo
 
